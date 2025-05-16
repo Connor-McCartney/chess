@@ -1,42 +1,46 @@
 #include <ncurses.h>
 #include <locale.h> 
+#include "pieces.c"
 
-
-//┌┬┐ ├┼┤ └┴┘  │    ─
-// ♝ ♚ ♞ ♟ ♛ ♜ ♗ ♔ ♘ ♙ ♕ ♖
-
-void draw_border() {
-    char* border = "\
+void draw_border(void) {
+    static char* border = "\
     \r    ┌───┬───┬───┬───┬───┬───┬───┬───┐\n\
-    \r 8  │   │   │   │   │   │   │   │   │\n\
+    \r  8 │   │   │   │   │   │   │   │   │\n\
     \r    ├───┼───┼───┼───┼───┼───┼───┼───┤\n\
-    \r 7  │   │   │   │   │   │   │   │   │\n\
+    \r  7 │   │   │   │   │   │   │   │   │\n\
     \r    ├───┼───┼───┼───┼───┼───┼───┼───┤\n\
-    \r 6  │   │   │   │   │   │   │   │   │\n\
+    \r  6 │   │   │   │   │   │   │   │   │\n\
     \r    ├───┼───┼───┼───┼───┼───┼───┼───┤\n\
-    \r 5  │   │   │   │   │   │   │   │   │\n\
+    \r  5 │   │   │   │   │   │   │   │   │\n\
     \r    ├───┼───┼───┼───┼───┼───┼───┼───┤\n\
-    \r 4  │   │   │   │   │   │   │   │   │\n\
+    \r  4 │   │   │   │   │   │   │   │   │\n\
     \r    ├───┼───┼───┼───┼───┼───┼───┼───┤\n\
-    \r 3  │   │   │   │   │   │   │   │   │\n\
+    \r  3 │   │   │   │   │   │   │   │   │\n\
     \r    ├───┼───┼───┼───┼───┼───┼───┼───┤\n\
-    \r 2  │   │   │   │   │   │   │   │   │\n\
+    \r  2 │   │   │   │   │   │   │   │   │\n\
     \r    ├───┼───┼───┼───┼───┼───┼───┼───┤\n\
-    \r 1  │   │   │   │   │   │   │   │   │\n\
+    \r  1 │   │   │   │   │   │   │   │   │\n\
     \r    └───┴───┴───┴───┴───┴───┴───┴───┘\n\
     \r      a   b   c   d   e   f   g   h  \n\
     \r                                     \n";
     mvwaddstr(stdscr, 0, 0, border);
+}
+
+void update_board(piece_t *board[8][8]) {
+    for (int i=0; i<8; i++) {
+        for (int j=0; j<8; j++) {
+            mvwaddstr(stdscr, 15 - 2*j, 6 + 4*i, board[i][j]->unicode_char);
+        }
+    }
     refresh();
 }
 
-
-void run() {
+void run(void) {
     curs_set(0); // hide cursor
     draw_border();
-
-
-
+    piece_t *board[8][8];
+    initalise_board(board);
+    update_board(board);
 
     getch();
 }
