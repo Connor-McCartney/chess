@@ -1,20 +1,51 @@
 #include <ncurses.h>
+#include <locale.h> 
 
-int main(int argc, char ** argv)
-{
-    // init screen and sets up screen
-    initscr();
 
-    // print to screen
-    printw("Hello World");
+//┌┬┐ ├┼┤ └┴┘  │    ─
+// ♝ ♚ ♞ ♟ ♛ ♜ ♗ ♔ ♘ ♙ ♕ ♖
 
-    // refreshes the screen
+void draw_border() {
+    char* border = "\
+    \r    ┌───┬───┬───┬───┬───┬───┬───┬───┐\n\
+    \r 8  │   │   │   │   │   │   │   │   │\n\
+    \r    ├───┼───┼───┼───┼───┼───┼───┼───┤\n\
+    \r 7  │   │   │   │   │   │   │   │   │\n\
+    \r    ├───┼───┼───┼───┼───┼───┼───┼───┤\n\
+    \r 6  │   │   │   │   │   │   │   │   │\n\
+    \r    ├───┼───┼───┼───┼───┼───┼───┼───┤\n\
+    \r 5  │   │   │   │   │   │   │   │   │\n\
+    \r    ├───┼───┼───┼───┼───┼───┼───┼───┤\n\
+    \r 4  │   │   │   │   │   │   │   │   │\n\
+    \r    ├───┼───┼───┼───┼───┼───┼───┼───┤\n\
+    \r 3  │   │   │   │   │   │   │   │   │\n\
+    \r    ├───┼───┼───┼───┼───┼───┼───┼───┤\n\
+    \r 2  │   │   │   │   │   │   │   │   │\n\
+    \r    ├───┼───┼───┼───┼───┼───┼───┼───┤\n\
+    \r 1  │   │   │   │   │   │   │   │   │\n\
+    \r    └───┴───┴───┴───┴───┴───┴───┴───┘\n\
+    \r      a   b   c   d   e   f   g   h  \n\
+    \r                                     \n";
+    mvwaddstr(stdscr, 0, 0, border);
     refresh();
+}
 
-    // pause the screen output
+
+void run() {
+    curs_set(0); // hide cursor
+    draw_border();
+
+
+
+
     getch();
+}
 
-    // deallocates memory and ends ncurses
-    endwin();
+
+int main(void) {
+    setlocale(LC_ALL, ""); // for special chars to work https://stackoverflow.com/questions/34538814/print-unicode-characters-in-c-using-ncurses
+    initscr(); // ncurses built-in setup
+    run();
+    endwin(); // ncurses built-in cleanup
     return 0;
 }
