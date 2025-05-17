@@ -1,7 +1,8 @@
 #include <ncurses.h>
 #include <locale.h> 
 #include <stdio.h>
-#include "pieces.c"
+#include "pieces.h"
+#include "moves.h"
 
 void draw_border(void) {
     static char* border = "\
@@ -50,32 +51,26 @@ void draw_board(square_t board[8][8]) {
     refresh();
 }
 
-void highlight_clicked_piece(square_t board[8][8], MEVENT event) {
-    int x, y;
-    x = (event.x-4)/4;
-    y = 7 - (event.y/2);
+void get_mouse_xy(MEVENT event, int mouse_xy[2]) {
+    int x = (event.x-4)/4;
+    int y = 7 - (event.y/2);
 
-    if (event.x < 5 || event.x > 35) {
+    if (event.x < 5 || event.x > 35 || event.y > 15) {
         // outside end border, invalid
         x = -1; 
     }
 
-    if (event.x % 4 == 0) {
+    if (event.x % 4 == 0 || event.y % 2 == 0) {
         // touching a border
         x = -1; 
     }
 
-    if (event.y > 15) {
-        // outside end border, invalid
-        y = -1;
-    }
+    mouse_xy[0] = x;
+    mouse_xy[1] = y;
+}
 
-    if (event.y % 2 == 0) {
-        // touching a border
-        y = -1;
-    }
-
-    // remove all previous highlighty
+void highlight_clicked_piece(square_t board[8][8], int x, int y) {
+    // remove all previous highlights
     for (int i=0; i<8; i++) {
         for (int j=0; j<8; j++) {
             board[i][j].highlight = NORMAL;
@@ -89,13 +84,18 @@ void highlight_clicked_piece(square_t board[8][8], MEVENT event) {
 }
 
 void run(void) {
+    int previous_x, previous_y;
+    square_t board[8][8];
+    // init to random empty square
+    previous_x = 4;
+    previous_y = 4;
+
     start_color();
     init_pair(1, COLOR_MAGENTA, COLOR_BLACK);
     init_pair(2, COLOR_GREEN, COLOR_BLACK);
 
     curs_set(0); // hide cursor
     draw_border();
-    square_t board[8][8];
     initalise_board(board);
     draw_board(board);
 
@@ -117,8 +117,22 @@ void run(void) {
             if (getmouse(&event) == OK) {
                 if (event.bstate & BUTTON1_PRESSED) {
                     // left click
-                    highlight_clicked_piece(board, event);
+                    int mouse_xy[2];
+                    get_mouse_xy(event, mouse_xy);
+                    int x = mouse_xy[0];
+                    int y = mouse_xy[1];
 
+                    if (board[previous_x][previous_y].piece.colour == turn) {
+                        highlight_clicked_piece(board, x, y);
+                        if (board[x][y].piece.colour != turn) {
+                            if (x != -1 && y != -1 && previous_y != -1 && previous_x != -1) {
+                                move_piece(board, previous_x, previous_y, x, y);
+                                turn *= -1;
+                            }
+                        }
+                    }
+                    previous_x = x;
+                    previous_y = y;
                 } 
             }
         }

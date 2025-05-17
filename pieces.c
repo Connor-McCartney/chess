@@ -1,53 +1,20 @@
-enum Colours {
-    WHITE = 1, 
-    BLACK = -1,
-};
+#include "pieces.h"
 
-enum Pieces {
-    ROOK,
-    KNIGHT,
-    BISHOP,
-    QUEEN,
-    KING,
-    PAWN,
-};
+piece_t white_rook = {"♜", WHITE, ROOK};
+piece_t white_knight = {"♞", WHITE, KNIGHT};
+piece_t white_bishop = {"♝", WHITE, BISHOP};
+piece_t white_queen = {"♛", WHITE, QUEEN};
+piece_t white_king = {"♚", WHITE, KING};
+piece_t white_pawn = {"♟", WHITE, PAWN};
 
-enum Highlights {
-    NORMAL,
-    CLICKED,
-    VALID_MOVE_DESTINATION,
-};
+piece_t black_rook = {"♖", BLACK, ROOK};
+piece_t black_knight = {"♘", BLACK, KNIGHT};
+piece_t black_bishop = {"♗", BLACK, BISHOP};
+piece_t black_queen = {"♕", BLACK, QUEEN};
+piece_t black_king = {"♔", BLACK, KING};
+piece_t black_pawn = {"♙", BLACK, PAWN};
 
-typedef struct Piece {
-    char *unicode_char;
-    int colour;
-    int piece;
-} piece_t;
-
-
-typedef struct Square{
-    piece_t piece;
-    int x;
-    int y;
-    int highlight;
-} square_t;
-
-
-struct Piece white_rook = {"♜", WHITE, ROOK};
-struct Piece white_knight = {"♞", WHITE, KNIGHT};
-struct Piece white_bishop = {"♝", WHITE, BISHOP};
-struct Piece white_queen = {"♛", WHITE, QUEEN};
-struct Piece white_king = {"♚", WHITE, KING};
-struct Piece white_pawn = {"♟", WHITE, PAWN};
-
-struct Piece black_rook = {"♖", BLACK, ROOK};
-struct Piece black_knight = {"♘", BLACK, KNIGHT};
-struct Piece black_bishop = {"♗", BLACK, BISHOP};
-struct Piece black_queen = {"♕", BLACK, QUEEN};
-struct Piece black_king = {"♔", BLACK, KING};
-struct Piece black_pawn = {"♙", BLACK, PAWN};
-
-struct Piece empty = {" ", -4, -4};
+piece_t empty = {" ", -4, -4};
 
 void initalise_board(square_t board[8][8]) {
     for (int i=0; i<8; i++) {
