@@ -11,3 +11,6 @@ typedef struct Move {
 } move_t;
 
 void move_piece(square_t board[8][8], move_t move);
+
+
+void _highlight_rook_moves(square_t board[8][8], int x, int y);

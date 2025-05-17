@@ -14,7 +14,8 @@ piece_t black_queen = {"♕", BLACK, QUEEN};
 piece_t black_king = {"♔", BLACK, KING};
 piece_t black_pawn = {"♙", BLACK, PAWN};
 
-piece_t empty = {" ", -4, -4};
+piece_t empty = {" ", EMPTY, BLANK};
+piece_t dot = {"·", EMPTY, DOT};
 
 void initalise_board(square_t board[8][8]) {
     for (int i=0; i<8; i++) {
@@ -34,20 +35,20 @@ void initalise_board(square_t board[8][8]) {
 
 
     board[0][0].piece = white_rook;
-    board[1][0].piece = white_knight;
-    board[2][0].piece = white_bishop;
+    //board[1][0].piece = white_knight;
+    //board[2][0].piece = white_bishop;
     board[3][0].piece = white_queen;
     board[4][0].piece = white_king;
-    board[5][0].piece = white_bishop;
-    board[6][0].piece = white_knight;
+    //board[5][0].piece = white_bishop;
+    //board[6][0].piece = white_knight;
     board[7][0].piece = white_rook;
 
     board[0][7].piece = black_rook;
-    board[1][7].piece = black_knight;
-    board[2][7].piece = black_bishop;
+    //board[1][7].piece = black_knight;
+    //board[2][7].piece = black_bishop;
     board[3][7].piece = black_queen;
     board[4][7].piece = black_king;
-    board[5][7].piece = black_bishop;
-    board[6][7].piece = black_knight;
+    //board[5][7].piece = black_bishop;
+    //board[6][7].piece = black_knight;
     board[7][7].piece = black_rook;
 }

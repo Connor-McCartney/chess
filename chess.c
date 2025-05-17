@@ -38,7 +38,7 @@ void draw_board(square_t board[8][8]) {
                 case CLICKED:
                     attrset(COLOR_PAIR(1));
                     break;
-                case VALID_MOVE_DESTINATION:
+                case LEGAL:
                     attrset(COLOR_PAIR(2));
                     break;
             }
@@ -58,26 +58,31 @@ void get_mouse_xy(MEVENT event, int mouse_xy[2]) {
     if (event.x < 5 || event.x > 35 || event.y > 15) {
         // outside end border, invalid
         x = -1; 
+        y = -1;
     }
 
     if (event.x % 4 == 0 || event.y % 2 == 0) {
         // touching a border
         x = -1; 
+        y = -1;
     }
 
     mouse_xy[0] = x;
     mouse_xy[1] = y;
 }
 
-void highlight_clicked_piece(square_t board[8][8], int x, int y) {
-    // remove all previous highlights
+void remove_highlights(square_t board[8][8]) {
     for (int i=0; i<8; i++) {
         for (int j=0; j<8; j++) {
             board[i][j].highlight = NORMAL;
+            if (board[i][j].piece.piece == DOT) {
+                board[i][j].piece = empty;
+            }
         }
     }
+}
 
-    // highlight clicked piece
+void highlight_clicked_piece(square_t board[8][8], int x, int y) {
     if (x != -1 && y != -1) {
         board[x][y].highlight = CLICKED;
     }
@@ -104,7 +109,7 @@ void run(void) {
     mouseinterval(0);
 
     MEVENT event;
-    while (1) {
+    while (true) {
         int c = getch();
 
         if (c == 'q') {
@@ -115,20 +120,30 @@ void run(void) {
             if (getmouse(&event) == OK) {
                 if (event.bstate & BUTTON1_PRESSED) {
                     // left click
+                    remove_highlights(board);
+
                     int mouse_xy[2];
                     get_mouse_xy(event, mouse_xy);
                     int x = mouse_xy[0];
                     int y = mouse_xy[1];
 
-                    if (board[previous_x][previous_y].piece.colour == turn) { // is our turn
-                        highlight_clicked_piece(board, x, y);
+                    if (x == -1 || y == -1 ) { // an actual square has been clicked. not the border
+                        continue;
+                    }
 
+                    if (board[x][y].piece.colour == turn) {
+                        highlight_clicked_piece(board, x, y);
+                    }
+
+                    if (board[x][y].piece.piece == ROOK && board[x][y].piece.colour == turn) {
+                        _highlight_rook_moves(board, x, y);
+                    }
+
+                    if (board[previous_x][previous_y].piece.colour == turn) { // is our turn
                         if (board[x][y].piece.colour != turn) { // can not capture own piece
-                            if (x != -1 && y != -1 && previous_y != -1 && previous_x != -1) { // an actual square has been clicked. not the border
-                                move_t move = {previous_x, previous_y, x, y};
-                                move_piece(board, move);
-                                turn *= -1;
-                            }
+                            move_t move = {previous_x, previous_y, x, y};
+                            move_piece(board, move);
+                            turn *= -1;
                         }
                     }
                     previous_x = x;
