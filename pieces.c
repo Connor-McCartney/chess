@@ -18,15 +18,20 @@ piece_t empty = {" ", -4, -4};
 
 void initalise_board(square_t board[8][8]) {
     for (int i=0; i<8; i++) {
-        board[i][1].piece = white_pawn;
-        board[i][6].piece = black_pawn;
-    }
-
-    for (int i=0; i<8; i++) {
-        for (int j=2; j<6; j++) {
+        for (int j=0; j<8; j++) {
             board[i][j].piece = empty;
         }
     }
+
+
+    /*
+    for (int i=0; i<8; i++) {
+        board[i][1].piece = white_pawn;
+        board[i][6].piece = black_pawn;
+    }
+    */
+
+
 
     board[0][0].piece = white_rook;
     board[1][0].piece = white_knight;

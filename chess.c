@@ -84,11 +84,9 @@ void highlight_clicked_piece(square_t board[8][8], int x, int y) {
 }
 
 void run(void) {
-    int previous_x, previous_y;
     square_t board[8][8];
-    // init to random empty square
-    previous_x = 4;
-    previous_y = 4;
+    int previous_x = -1;
+    int previous_y = -1;
 
     start_color();
     init_pair(1, COLOR_MAGENTA, COLOR_BLACK);
@@ -122,11 +120,13 @@ void run(void) {
                     int x = mouse_xy[0];
                     int y = mouse_xy[1];
 
-                    if (board[previous_x][previous_y].piece.colour == turn) {
+                    if (board[previous_x][previous_y].piece.colour == turn) { // is our turn
                         highlight_clicked_piece(board, x, y);
-                        if (board[x][y].piece.colour != turn) {
-                            if (x != -1 && y != -1 && previous_y != -1 && previous_x != -1) {
-                                move_piece(board, previous_x, previous_y, x, y);
+
+                        if (board[x][y].piece.colour != turn) { // can not capture own piece
+                            if (x != -1 && y != -1 && previous_y != -1 && previous_x != -1) { // an actual square has been clicked. not the border
+                                move_t move = {previous_x, previous_y, x, y};
+                                move_piece(board, move);
                                 turn *= -1;
                             }
                         }
@@ -136,6 +136,7 @@ void run(void) {
                 } 
             }
         }
+
         draw_board(board);
         refresh();
     }
