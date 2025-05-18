@@ -38,15 +38,6 @@ void push_end(node_t *head, move_t move) {
 
 
 void move_piece(square_t board[8][8], move_t move) {
-    assert(move.start_x >= 0);
-    assert(move.start_y >= 0);
-    assert(move.end_x >= 0);
-    assert(move.end_y >= 0);
-    assert(move.start_x <= 7);
-    assert(move.start_y <= 7);
-    assert(move.end_x <= 7);
-    assert(move.end_y <= 7);
-
     // en passant, promotion, and castling are exceptions...
 
     // piece at end becomes piece at start, and no longer highlighted
@@ -59,40 +50,93 @@ void move_piece(square_t board[8][8], move_t move) {
 
 
 node_t *get_possible_rook_moves(square_t board[8][8], int x, int y) {
-    assert(x >= 0);
-    assert(x >= 0);
-    assert(y <= 7);
-    assert(x <= 7);
-    assert(board[x][y].piece.piece == ROOK);
-    assert(board[x][y].piece.colour != EMPTY);
+    int col = board[x][y].piece.colour;
+    int xx, yy;
 
+    node_t *possible_moves = malloc(sizeof(node_t));
+    possible_moves->next = NULL;
+
+    int up_down[4] = {0, 0, -1, 1};
+    int left_right[4] = {-1, 1, 0, 0};
+    for (int i=0; i<4; i++) {
+        yy = y;
+        xx = x;
+        while (true) {
+            xx += left_right[i];
+            yy += up_down[i];
+            if (xx > 7 || yy > 7 || xx < 0 || yy < 0) {
+                break;
+            }
+            if (board[xx][yy].piece.colour != col) {
+                move_t move = {x, y, xx, yy};
+                push_end(possible_moves, move);
+            }
+            if (board[xx][yy].piece.colour != EMPTY) {
+                break;
+            } 
+        }
+    }
+
+    return possible_moves;
+}
+
+
+node_t *get_possible_king_moves(square_t board[8][8], int x, int y) {
     int col = board[x][y].piece.colour;
     int i;
 
     node_t *possible_moves = malloc(sizeof(node_t));
     possible_moves->next = NULL;
 
-    // up
-    i = y;
-    while (true) {
-        i += col;
+    // up/down
+    for (int direction = -1; direction <= 1; direction += 2) { // [-1, 1]
+        i = y + direction;
         if (i > 7 || i < 0) {
-            break;
+            continue;
         }
         if (board[x][i].piece.colour != col) {
             move_t move = {x, y, x, i};
             push_end(possible_moves, move);
         }
         if (board[x][i].piece.colour != EMPTY) {
-            break;
+            continue;
         } 
     }
+
+    // left/right
+    for (int direction = -1; direction <= 1; direction += 2) { // [-1, 1]
+        i = x + direction;
+        if (i > 7 || i < 0) {
+            continue;
+        }
+        if (board[i][y].piece.colour != col) {
+            move_t move = {x, y, i, y};
+            push_end(possible_moves, move);
+        }
+        if (board[i][y].piece.colour != EMPTY) {
+            continue;
+        } 
+    }
+
     return possible_moves;
 }
 
-node_t *get_possible_king_moves(square_t board[8][8], int x, int y) {
+node_t *get_possible_pawn_moves(square_t board[8][8], int x, int y) {
+    int col = board[x][y].piece.colour;
+    int i;
+
     node_t *possible_moves = malloc(sizeof(node_t));
     possible_moves->next = NULL;
+
+    i = y;
+    i += col;
+    if (i <= 7 && i >= 0) {
+        if (board[x][i].piece.colour == EMPTY) {
+            move_t move = {x, y, x, i};
+            push_end(possible_moves, move);
+        }
+    }
+
     return possible_moves;
 }
 
@@ -124,6 +168,9 @@ void highlight_legal_moves(square_t board[8][8], int x, int y) {
             break;
         case KING:
             possible_moves = get_possible_king_moves(board, x, y);
+            break;
+        case PAWN:
+            possible_moves = get_possible_pawn_moves(board, x, y);
             break;
     }
 
