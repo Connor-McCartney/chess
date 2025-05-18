@@ -2,21 +2,40 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdlib.h>
 #include "pieces.h"
 #include "moves.h"
 
+int turn = WHITE;
 
-void push_end(node_t *head, node_t *move_node) {
+node_t *create_node(move_t move){
+    node_t *new_node = malloc(sizeof(node_t));
+    new_node->move = move;
+    new_node->next = NULL;
+    return new_node;
+}
+
+void destroy_list(node_t *head){
     node_t *current = head;
-    /*
+    node_t *next = current;
+    while (current->next != NULL) {
+        next = current->next;
+        free(current);
+        current = next;
+    }
+    free(current);
+
+}
+
+void push_end(node_t *head, move_t move) {
+    node_t *current = head;
     while (current->next != NULL) {
         current = current->next;
     }
-    */
-    current->next = move_node;
+    node_t *new_node = create_node(move);
+    current->next = new_node;
 }
 
-int turn = WHITE;
 
 void move_piece(square_t board[8][8], move_t move) {
     assert(move.start_x >= 0);
@@ -39,17 +58,19 @@ void move_piece(square_t board[8][8], move_t move) {
 }
 
 
-void _highlight_rook_moves(node_t *possible_moves, square_t board[8][8], int x, int y) {
+node_t *get_possible_rook_moves(square_t board[8][8], int x, int y) {
     assert(x >= 0);
     assert(x >= 0);
     assert(y <= 7);
     assert(x <= 7);
     assert(board[x][y].piece.piece == ROOK);
     assert(board[x][y].piece.colour != EMPTY);
+
     int col = board[x][y].piece.colour;
     int i;
 
-
+    node_t *possible_moves = malloc(sizeof(node_t));
+    possible_moves->next = NULL;
 
     // up
     i = y;
@@ -60,25 +81,53 @@ void _highlight_rook_moves(node_t *possible_moves, square_t board[8][8], int x, 
         }
         if (board[x][i].piece.colour != col) {
             move_t move = {x, y, x, i};
-            node_t move_node = {move, NULL};
-            push_end(possible_moves, &move_node);
+            push_end(possible_moves, move);
         }
         if (board[x][i].piece.colour != EMPTY) {
             break;
         } 
+    }
+    return possible_moves;
+}
 
+node_t *get_possible_king_moves(square_t board[8][8], int x, int y) {
+    node_t *possible_moves = malloc(sizeof(node_t));
+    possible_moves->next = NULL;
+    return possible_moves;
+}
 
-        node_t *current = possible_moves;
-        while (current->next != NULL) {
-            current = current->next;
-            int end_x = current->move.end_x;
-            int end_y = current->move.end_y;
-            if (board[end_x][end_y].piece.colour == EMPTY) {
-                board[end_x][end_y].piece = dot;
-            }
-            if (board[x][i].piece.colour != col) {
-                board[x][i].highlight = LEGAL;
-            }
+void highlight_moves(square_t board[8][8], node_t *possible_moves) {
+    node_t *current = possible_moves;
+    while (current->next != NULL) {
+        current = current->next;
+        int end_x = current->move.end_x;
+        int end_y = current->move.end_y;
+        board[end_x][end_y].highlight = LEGAL;
+        if (board[end_x][end_y].piece.colour == EMPTY) {
+            board[end_x][end_y].piece = dot;
         }
     }
+}
+
+
+void highlight_legal_moves(square_t board[8][8], int x, int y) {
+    piece_t piece = board[x][y].piece;
+
+    if (piece.colour != turn) {
+        return;
+    }
+
+    node_t *possible_moves = NULL;
+    switch (piece.piece) {
+        case ROOK:
+            possible_moves = get_possible_rook_moves(board, x, y);
+            break;
+        case KING:
+            possible_moves = get_possible_king_moves(board, x, y);
+            break;
+    }
+
+    assert (possible_moves != NULL);
+    highlight_moves(board, possible_moves);
+    destroy_list(possible_moves);
 }

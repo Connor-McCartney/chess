@@ -82,12 +82,6 @@ void remove_highlights(square_t board[8][8]) {
     }
 }
 
-void highlight_clicked_piece(square_t board[8][8], int x, int y) {
-    if (x != -1 && y != -1) {
-        board[x][y].highlight = CLICKED;
-    }
-}
-
 void run(void) {
     square_t board[8][8];
     int previous_x = -1;
@@ -131,17 +125,17 @@ void run(void) {
                         continue;
                     }
 
+                    piece_t current_piece = board[x][y].piece;
+                    piece_t previous_piece = board[previous_x][previous_y].piece;
+
                     if (board[x][y].piece.colour == turn) {
-                        highlight_clicked_piece(board, x, y);
+                        board[x][y].highlight = CLICKED;
                     }
 
-                    if (board[x][y].piece.piece == ROOK && board[x][y].piece.colour == turn) {
-                        node_t possible_moves;
-                        _highlight_rook_moves(&possible_moves, board, x, y);
-                    }
+                    highlight_legal_moves(board, x, y);
 
-                    if (board[previous_x][previous_y].piece.colour == turn) { // is our turn
-                        if (board[x][y].piece.colour != turn) { // can not capture own piece
+                    if (previous_piece.colour == turn) { // is our turn
+                        if (current_piece.colour != turn) { // can not capture own piece
                             move_t move = {previous_x, previous_y, x, y};
                             move_piece(board, move);
                             turn *= -1;
