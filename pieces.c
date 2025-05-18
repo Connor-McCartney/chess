@@ -25,12 +25,10 @@ void initalise_board(square_t board[8][8]) {
     }
 
 
-    /*
     for (int i=0; i<8; i++) {
         board[i][1].piece = white_pawn;
         board[i][6].piece = black_pawn;
     }
-    */
 
 
 

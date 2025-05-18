@@ -1,6 +1,7 @@
 #include <ncurses.h>
 #include <locale.h> 
 #include <stdio.h>
+#include <stdlib.h>
 #include "pieces.h"
 #include "moves.h"
 
@@ -82,7 +83,7 @@ void remove_highlights(square_t board[8][8]) {
     }
 }
 
-void run(void) {
+void human_vs_human(void) {
     square_t board[8][8];
     int previous_x = -1;
     int previous_y = -1;
@@ -153,10 +154,48 @@ void run(void) {
 }
 
 
+void random_vs_random(void) {
+    square_t board[8][8];
+    mousemask(ALL_MOUSE_EVENTS, NULL);
+    noecho();
+    curs_set(0); // hide cursor
+    draw_border();
+    initalise_board(board);
+    draw_board(board);
+    refresh();
+
+    while (true) {
+        int c = getch();
+
+        if (c == 'q') {
+            return;
+        }
+
+
+        node_t *legal_moves = get_all_legal_moves(board);
+
+
+        int r = 1 + rand() % 10; // todo change to length of list
+        node_t *current = legal_moves;
+        for (int t=0; t<r; t++) {
+            current = current->next;
+        }
+        move_piece(board, current->move);
+        //move_piece(board, legal_moves->next->move);
+
+
+        turn *= -1;
+        draw_board(board);
+        refresh();
+    }
+}
+
+
 int main(void) {
     setlocale(LC_ALL, ""); // for special chars to work https://stackoverflow.com/questions/34538814/print-unicode-characters-in-c-using-ncurses
     initscr(); // ncurses built-in setup
-    run();
+    //human_vs_human();
+    random_vs_random();
     endwin(); // ncurses built-in cleanup
 
     return 0;

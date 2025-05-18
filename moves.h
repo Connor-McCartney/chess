@@ -17,3 +17,4 @@ typedef struct Node {
 
 void move_piece(square_t board[8][8], move_t move);
 void highlight_legal_moves(square_t board[8][8], int x, int y);
+node_t *get_all_legal_moves(square_t board[8][8]);
