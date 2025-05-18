@@ -35,20 +35,20 @@ void initalise_board(square_t board[8][8]) {
 
 
     board[0][0].piece = white_rook;
-    //board[1][0].piece = white_knight;
-    //board[2][0].piece = white_bishop;
+    board[1][0].piece = white_knight;
+    board[2][0].piece = white_bishop;
     board[3][0].piece = white_queen;
     board[4][0].piece = white_king;
-    //board[5][0].piece = white_bishop;
-    //board[6][0].piece = white_knight;
+    board[5][0].piece = white_bishop;
+    board[6][0].piece = white_knight;
     board[7][0].piece = white_rook;
 
     board[0][7].piece = black_rook;
-    //board[1][7].piece = black_knight;
-    //board[2][7].piece = black_bishop;
+    board[1][7].piece = black_knight;
+    board[2][7].piece = black_bishop;
     board[3][7].piece = black_queen;
     board[4][7].piece = black_king;
-    //board[5][7].piece = black_bishop;
-    //board[6][7].piece = black_knight;
+    board[5][7].piece = black_bishop;
+    board[6][7].piece = black_knight;
     board[7][7].piece = black_rook;
 }

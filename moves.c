@@ -80,43 +80,128 @@ node_t *get_possible_rook_moves(square_t board[8][8], int x, int y) {
     return possible_moves;
 }
 
-
-node_t *get_possible_king_moves(square_t board[8][8], int x, int y) {
+node_t *get_possible_knight_moves(square_t board[8][8], int x, int y) {
     int col = board[x][y].piece.colour;
-    int i;
+    int xx, yy;
 
     node_t *possible_moves = malloc(sizeof(node_t));
     possible_moves->next = NULL;
 
-    // up/down
-    for (int direction = -1; direction <= 1; direction += 2) { // [-1, 1]
-        i = y + direction;
-        if (i > 7 || i < 0) {
-            continue;
+
+    for (int i=-2; i<=2; i++) {
+        for (int j=-2; j<=2; j++) {
+            if (i==0 || j==0 || abs(i) == abs(j)) {
+                continue;
+            }
+            yy = y + i;
+            xx = x + j;
+            if (xx > 7 || yy > 7 || xx < 0 || yy < 0) {
+                continue;
+            }
+            if (board[xx][yy].piece.colour != col) {
+                move_t move = {x, y, xx, yy};
+                push_end(possible_moves, move);
+            }
+            if (board[xx][yy].piece.colour != EMPTY) {
+                continue;
+            } 
         }
-        if (board[x][i].piece.colour != col) {
-            move_t move = {x, y, x, i};
-            push_end(possible_moves, move);
-        }
-        if (board[x][i].piece.colour != EMPTY) {
-            continue;
-        } 
     }
 
-    // left/right
-    for (int direction = -1; direction <= 1; direction += 2) { // [-1, 1]
-        i = x + direction;
-        if (i > 7 || i < 0) {
-            continue;
+    return possible_moves;
+}
+
+node_t *get_possible_king_moves(square_t board[8][8], int x, int y) {
+    int col = board[x][y].piece.colour;
+    int xx, yy;
+
+    node_t *possible_moves = malloc(sizeof(node_t));
+    possible_moves->next = NULL;
+
+
+    for (int i=-1; i<=1; i++) {
+        for (int j=-1; j<=1; j++) {
+            yy = y + i;
+            xx = x + j;
+            if (xx > 7 || yy > 7 || xx < 0 || yy < 0) {
+                continue;
+            }
+            if (board[xx][yy].piece.colour != col) {
+                move_t move = {x, y, xx, yy};
+                push_end(possible_moves, move);
+            }
+            if (board[xx][yy].piece.colour != EMPTY) {
+                continue;
+            } 
         }
-        if (board[i][y].piece.colour != col) {
-            move_t move = {x, y, i, y};
-            push_end(possible_moves, move);
-        }
-        if (board[i][y].piece.colour != EMPTY) {
-            continue;
-        } 
     }
+
+    return possible_moves;
+}
+
+
+node_t *get_possible_bishop_moves(square_t board[8][8], int x, int y) {
+    int col = board[x][y].piece.colour;
+    int xx, yy;
+
+    node_t *possible_moves = malloc(sizeof(node_t));
+    possible_moves->next = NULL;
+
+
+    for (int i=-1; i<=1; i+=2) {
+        for (int j=-1; j<=1; j+=2) {
+            yy = y;
+            xx = x;
+            while (true) {
+                xx += i;
+                yy += j;
+                if (xx > 7 || yy > 7 || xx < 0 || yy < 0) {
+                    break;
+                }
+                if (board[xx][yy].piece.colour != col) {
+                    move_t move = {x, y, xx, yy};
+                    push_end(possible_moves, move);
+                }
+                if (board[xx][yy].piece.colour != EMPTY) {
+                    break;
+                } 
+            }
+        }
+    }
+
+
+    return possible_moves;
+}
+
+node_t *get_possible_queen_moves(square_t board[8][8], int x, int y) {
+    int col = board[x][y].piece.colour;
+    int xx, yy;
+
+    node_t *possible_moves = malloc(sizeof(node_t));
+    possible_moves->next = NULL;
+
+
+    for (int i=-1; i<=1; i++) {
+        for (int j=-1; j<=1; j++) {
+            yy = y;
+            xx = x;
+            while (true) {
+                xx += i;
+                yy += j;
+                if (xx > 7 || yy > 7 || xx < 0 || yy < 0) {
+                    break;
+                }
+                if (board[xx][yy].piece.colour != col) {
+                    move_t move = {x, y, xx, yy};
+                    push_end(possible_moves, move);
+                }
+                if (board[xx][yy].piece.colour != EMPTY) {
+                    break;
+                } 
+            }
+        }
+    }
+
 
     return possible_moves;
 }
@@ -169,8 +254,17 @@ void highlight_legal_moves(square_t board[8][8], int x, int y) {
         case KING:
             possible_moves = get_possible_king_moves(board, x, y);
             break;
+        case QUEEN:
+            possible_moves = get_possible_queen_moves(board, x, y);
+            break;
         case PAWN:
             possible_moves = get_possible_pawn_moves(board, x, y);
+            break;
+        case BISHOP:
+            possible_moves = get_possible_bishop_moves(board, x, y);
+            break;
+        case KNIGHT:
+            possible_moves = get_possible_knight_moves(board, x, y);
             break;
     }
 
