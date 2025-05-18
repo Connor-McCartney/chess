@@ -136,7 +136,8 @@ void run(void) {
                     }
 
                     if (board[x][y].piece.piece == ROOK && board[x][y].piece.colour == turn) {
-                        _highlight_rook_moves(board, x, y);
+                        node_t possible_moves;
+                        _highlight_rook_moves(&possible_moves, board, x, y);
                     }
 
                     if (board[previous_x][previous_y].piece.colour == turn) { // is our turn
@@ -163,5 +164,6 @@ int main(void) {
     initscr(); // ncurses built-in setup
     run();
     endwin(); // ncurses built-in cleanup
+
     return 0;
 }
