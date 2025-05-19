@@ -37,6 +37,22 @@ int list_length(node_t *head){
     return length;
 }
 
+bool list_contains(node_t *head, move_t check_move){
+    node_t *current = head;
+    while (current->next != NULL) {
+        current = current->next;
+        move_t move = current-> move;
+        if (move.start_x == check_move.start_x && \
+            move.start_y == check_move.start_y && \
+            move.end_x   == check_move.end_x   && \
+            move.end_y   == check_move.end_y) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
 void push_end(node_t *head, move_t move) {
     node_t *current = head;
     while (current->next != NULL) {

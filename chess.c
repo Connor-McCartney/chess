@@ -187,10 +187,11 @@ void human_vs_human(void) {
 
                     if (previous_piece.colour == turn) { // is our turn
                         if (current_piece.colour != turn) { // can not capture own piece
-                            // todo, is_legal, use a list_contains function (which needs to check all elemnts of the struct)
                             move_t move = {previous_x, previous_y, x, y};
-                            move_piece(board, move);
-                            turn *= -1;
+                            if (list_contains(legal_moves, move)) {
+                                move_piece(board, move);
+                                turn *= -1;
+                            }
                         }
                     }
                     previous_x = x;

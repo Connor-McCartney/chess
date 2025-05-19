@@ -20,3 +20,4 @@ void highlight_legal_moves(square_t board[8][8], int x, int y);
 node_t *get_all_legal_moves(square_t board[8][8]);
 bool is_check(square_t board[8][8]);
 int list_length(node_t *head);
+bool list_contains(node_t *head, move_t check_move);
