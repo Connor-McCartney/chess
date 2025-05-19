@@ -43,12 +43,29 @@ void draw_board(square_t board[8][8]) {
                 case LEGAL:
                     attrset(COLOR_PAIR(2));
                     break;
+                case CHECK:
+                    attrset(COLOR_PAIR(3));
+                    break;
             }
             piece_t piece = board[i][j].piece;
             mvwaddstr(stdscr, 15 - 2*j, 6 + 4*i, piece.unicode_char);
         }
     }
     attrset(A_NORMAL);
+
+
+    if (is_check(board)) {
+        mvwaddstr(stdscr, 20, 3, "check");
+    } else {
+        mvwaddstr(stdscr, 20, 3, "     ");
+    }
+
+    if (turn == WHITE) {
+        mvwaddstr(stdscr, 23, 3, "white's turn");
+    } else if (turn == BLACK) {
+        mvwaddstr(stdscr, 23, 3, "black's turn");
+    }
+
     refresh();
 }
 
@@ -91,6 +108,7 @@ void human_vs_human(void) {
     start_color();
     init_pair(1, COLOR_MAGENTA, COLOR_BLACK);
     init_pair(2, COLOR_GREEN, COLOR_BLACK);
+    init_pair(3, COLOR_RED, COLOR_BLACK);
 
     curs_set(0); // hide cursor
     draw_border();
@@ -149,17 +167,7 @@ void human_vs_human(void) {
             }
         }
 
-        if (is_check(board)) {
-            mvwaddstr(stdscr, 20, 3, "check");
-        } else {
-            mvwaddstr(stdscr, 20, 3, "     ");
-        }
 
-        if (turn == WHITE) {
-            mvwaddstr(stdscr, 23, 3, "white's turn");
-        } else if (turn == BLACK) {
-            mvwaddstr(stdscr, 23, 3, "black's turn");
-        }
 
         draw_board(board);
     }
@@ -189,14 +197,11 @@ void random_vs_random(void) {
         int num_possible_moves = list_length(legal_moves);
         assert(num_possible_moves != 0); // game over
         int r = 1 + rand() % num_possible_moves; 
-        //int r = 1 + rand() % 2;  // weird segfault...
         node_t *current = legal_moves;
         for (int t=0; t<r; t++) {
             current = current->next;
         }
         move_piece(board, current->move);
-        //move_piece(board, legal_moves->next->move);
-
 
         turn *= -1;
         draw_board(board);
@@ -205,11 +210,11 @@ void random_vs_random(void) {
 
 
 int main(void) {
+    srand(123456);
     setlocale(LC_ALL, ""); // for special chars to work https://stackoverflow.com/questions/34538814/print-unicode-characters-in-c-using-ncurses
     initscr(); // ncurses built-in setup
-    //human_vs_human();
-    random_vs_random();
+    human_vs_human();
+    //random_vs_random();
     endwin(); // ncurses built-in cleanup
-
     return 0;
 }

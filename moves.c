@@ -49,7 +49,6 @@ void push_end(node_t *head, move_t move) {
 
 void move_piece(square_t board[8][8], move_t move) {
     piece_t start = board[move.start_x][move.start_y].piece;
-    //piece_t end = board[move.end_x][move.end_y].piece;
 
     // en passant, promotion, and castling are exceptions...
 
@@ -403,6 +402,7 @@ bool is_check(square_t board[8][8]) {
         int end_x = current->move.end_x;
         int end_y = current->move.end_y;
         if (board[end_x][end_y].piece.piece == KING && board[end_x][end_y].piece.colour == turn) {
+            board[end_x][end_y].highlight = CHECK;
             return true;
         }
     }

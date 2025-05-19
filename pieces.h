@@ -21,6 +21,7 @@ enum Highlights {
     NORMAL,
     CLICKED,
     LEGAL,
+    CHECK,
 };
 
 typedef struct Piece {
