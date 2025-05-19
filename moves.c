@@ -277,8 +277,8 @@ node_t *get_possible_pawn_moves(square_t board[8][8], int x, int y) {
     return possible_moves;
 }
 
-void highlight_moves(square_t board[8][8], node_t *possible_moves) { // todo chaange to legal
-    node_t *current = possible_moves;
+void highlight_moves(square_t board[8][8], node_t *legal_moves) {
+    node_t *current = legal_moves;
     while (current->next != NULL) {
         current = current->next;
         int end_x = current->move.end_x;
@@ -402,7 +402,6 @@ bool is_check(square_t board[8][8]) {
         int end_x = current->move.end_x;
         int end_y = current->move.end_y;
         if (board[end_x][end_y].piece.piece == KING && board[end_x][end_y].piece.colour == turn) {
-            board[end_x][end_y].highlight = CHECK;
             return true;
         }
     }

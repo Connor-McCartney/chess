@@ -31,6 +31,20 @@ void draw_border(void) {
 }
 
 void draw_board(square_t board[8][8]) {
+    if (is_check(board) == true) {
+        mvwaddstr(stdscr, 20, 3, "check");
+        for (int i=0; i<8; i++) {
+            for (int j=0; j<8; j++) {
+                if (board[i][j].piece.piece == KING && board[i][j].piece.colour == turn) {
+                    board[i][j].highlight = CHECK;
+                }
+            }
+        }
+    } else {
+        mvwaddstr(stdscr, 20, 3, "     ");
+    }
+
+
     for (int i=0; i<8; i++) {
         for (int j=0; j<8; j++) {
             switch (board[i][j].highlight) {
@@ -53,12 +67,6 @@ void draw_board(square_t board[8][8]) {
     }
     attrset(A_NORMAL);
 
-
-    if (is_check(board)) {
-        mvwaddstr(stdscr, 20, 3, "check");
-    } else {
-        mvwaddstr(stdscr, 20, 3, "     ");
-    }
 
     if (turn == WHITE) {
         mvwaddstr(stdscr, 23, 3, "white's turn");
@@ -167,8 +175,6 @@ void human_vs_human(void) {
             }
         }
 
-
-
         draw_board(board);
     }
 }
@@ -176,12 +182,23 @@ void human_vs_human(void) {
 
 void random_vs_random(void) {
     square_t board[8][8];
-    mousemask(ALL_MOUSE_EVENTS, NULL);
-    noecho();
+
+    start_color();
+    init_pair(1, COLOR_MAGENTA, COLOR_BLACK);
+    init_pair(2, COLOR_GREEN, COLOR_BLACK);
+    init_pair(3, COLOR_RED, COLOR_BLACK);
+
     curs_set(0); // hide cursor
     draw_border();
     initalise_board(board);
     draw_board(board);
+    cbreak();
+    noecho();
+    keypad(stdscr, TRUE);
+    mousemask(ALL_MOUSE_EVENTS, NULL);
+    mouseinterval(0);
+
+
 
     while (true) {
         int c = getch();
@@ -189,10 +206,10 @@ void random_vs_random(void) {
         if (c == 'q') {
             return;
         }
+        remove_highlights(board);
 
 
         node_t *legal_moves = get_all_legal_moves(board); 
-
 
         int num_possible_moves = list_length(legal_moves);
         assert(num_possible_moves != 0); // game over
@@ -202,7 +219,6 @@ void random_vs_random(void) {
             current = current->next;
         }
         move_piece(board, current->move);
-
         turn *= -1;
         draw_board(board);
     }
@@ -210,11 +226,13 @@ void random_vs_random(void) {
 
 
 int main(void) {
-    srand(123456);
+    srand(1234);
     setlocale(LC_ALL, ""); // for special chars to work https://stackoverflow.com/questions/34538814/print-unicode-characters-in-c-using-ncurses
     initscr(); // ncurses built-in setup
-    human_vs_human();
-    //random_vs_random();
+
+    //human_vs_human();
+    random_vs_random();
+
     endwin(); // ncurses built-in cleanup
     return 0;
 }
