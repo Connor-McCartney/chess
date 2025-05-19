@@ -25,7 +25,16 @@ void destroy_list(node_t *head){
         current = next;
     }
     free(current);
+}
 
+int list_length(node_t *head){
+    int length = 0;
+    node_t *current = head;
+    while (current->next != NULL) {
+        current = current->next;
+        length += 1;
+    }
+    return length;
 }
 
 void push_end(node_t *head, move_t move) {
@@ -39,12 +48,27 @@ void push_end(node_t *head, move_t move) {
 
 
 void move_piece(square_t board[8][8], move_t move) {
+    piece_t start = board[move.start_x][move.start_y].piece;
+    //piece_t end = board[move.end_x][move.end_y].piece;
+
     // en passant, promotion, and castling are exceptions...
 
-    // piece at end becomes piece at start, and no longer highlighted
-    board[move.end_x][move.end_y].piece = board[move.start_x][move.start_y].piece;
-    board[move.end_x][move.end_y].highlight = NORMAL;
+    // I'll just auto-queen instead of making an underpromotion popup
+    if (start.piece == PAWN && start.colour == WHITE && move.end_y == 7) {
+        board[move.end_x][move.end_y].piece = white_queen;
+        board[move.start_x][move.start_y].piece = empty;
+        return;
+    }
+    if (start.piece == PAWN && start.colour == BLACK && move.end_y == 0) {
+        board[move.end_x][move.end_y].piece = black_queen;
+        board[move.start_x][move.start_y].piece = empty;
+        return;
+    }
 
+    // regular moves
+
+    // piece at end becomes piece at start
+    board[move.end_x][move.end_y].piece = start;
     // piece at start becomes empty
     board[move.start_x][move.start_y].piece = empty;
 }
@@ -219,11 +243,10 @@ node_t *get_possible_pawn_moves(square_t board[8][8], int x, int y) {
         yy = y;
         for (int t=0; t<2; t++) {
             yy += col;
-            if (board[x][yy].piece.colour != col) {
+            if (board[x][yy].piece.colour == EMPTY) {
                 move_t move = {x, y, x, yy};
                 push_end(possible_moves, move);
-            }
-            if (board[x][yy].piece.colour != EMPTY) {
+            } else {
                 break;
             } 
         }
@@ -298,11 +321,8 @@ node_t *get_piece_possible_moves(square_t board[8][8], int x, int y) {
 }
 
 node_t *get_piece_legal_moves(square_t board[8][8], int x, int y) {
-    //piece_t piece = board[x][y].piece;
     node_t *possible_moves = get_piece_possible_moves(board, x, y);
 
-    
-    // check if legal
     node_t *legal_moves = malloc(sizeof(node_t));
     legal_moves->next = NULL;
 
@@ -317,6 +337,7 @@ node_t *get_piece_legal_moves(square_t board[8][8], int x, int y) {
                 board_copy[i][j] = board[i][j];
             }
         }
+
         // play the move, and see if we are check
         move_piece(board_copy, move);
         if (is_check(board_copy) == false) {
@@ -325,20 +346,18 @@ node_t *get_piece_legal_moves(square_t board[8][8], int x, int y) {
     }
 
     destroy_list(possible_moves);
+    assert (legal_moves != NULL);
     return legal_moves;
 }
 
 void highlight_legal_moves(square_t board[8][8], int x, int y) {
     piece_t piece = board[x][y].piece;
-
     if (piece.colour != turn) {
         return;
     }
-
-    //node_t *possible_moves = get_piece_possible_moves(board, x, y);
-    node_t *possible_moves = get_piece_legal_moves(board, x, y);
-    highlight_moves(board, possible_moves);
-    destroy_list(possible_moves);
+    node_t *legal_moves = get_piece_legal_moves(board, x, y);
+    highlight_moves(board, legal_moves);
+    destroy_list(legal_moves);
 }
 
 node_t *get_all_possible_moves(square_t board[8][8]) {
@@ -367,6 +386,8 @@ node_t *get_all_possible_moves(square_t board[8][8]) {
         }
     }
 
+
+    assert (all_possible_moves != NULL);
     return all_possible_moves;
 }
 
@@ -381,7 +402,7 @@ bool is_check(square_t board[8][8]) {
         current = current->next;
         int end_x = current->move.end_x;
         int end_y = current->move.end_y;
-        if (board[end_x][end_y].piece.piece == KING) {
+        if (board[end_x][end_y].piece.piece == KING && board[end_x][end_y].piece.colour == turn) {
             return true;
         }
     }
@@ -389,33 +410,33 @@ bool is_check(square_t board[8][8]) {
     return false;
 }
 
-/*
 node_t *get_all_legal_moves(square_t board[8][8]) {
-    node_t *all_legal_moves = malloc(sizeof(node_t));
-    all_legal_moves->next = NULL;
+    node_t *all_possible_moves = malloc(sizeof(node_t));
+    all_possible_moves->next = NULL;
 
-    node_t *all_possible_moves = get_all_possible_moves(board);
-    node_t *current = all_possible_moves;
-    while (current->next != NULL) {
-        current = current->next;
-        move_t move = current->move;
+    for (int x=0; x<8; x++) {
+        for (int y=0; y<8; y++) {
+            piece_t piece = board[x][y].piece;
 
-        // play the move, and see if we are check
-        square_t board_copy[8][8];
-        for (int i=0; i<8; i++) {
-            for (int j=0; j<8; j++) {
-                board_copy[i][i] = board[i][j];
+            if (piece.colour != turn) {
+                continue;
             }
-        }
-        move_piece(board_copy, move);
-        if (is_check(board_copy) == false) {
-            push_end(all_legal_moves, move);
+
+            node_t *possible_moves = get_piece_legal_moves(board, x, y);
+            assert (possible_moves != NULL);
+
+            node_t *current = possible_moves;
+            while (current->next != NULL) {
+                current = current->next;
+                move_t move_copy = {current->move.start_x, current->move.start_y, current->move.end_x, current->move.end_y};
+                push_end(all_possible_moves, move_copy);
+            }
+
+            destroy_list(possible_moves);
         }
     }
 
-    destroy_list(all_possible_moves);
-    return all_legal_moves;
-}
-*/
 
-// todo change legal_moves to possible_moves and then make a new lega_moves function
+    assert (all_possible_moves != NULL);
+    return all_possible_moves;
+}

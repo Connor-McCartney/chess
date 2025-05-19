@@ -31,7 +31,6 @@ void initalise_board(square_t board[8][8]) {
     }
 
 
-
     board[0][0].piece = white_rook;
     board[1][0].piece = white_knight;
     board[2][0].piece = white_bishop;

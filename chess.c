@@ -2,6 +2,7 @@
 #include <locale.h> 
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #include "pieces.h"
 #include "moves.h"
 
@@ -182,10 +183,13 @@ void random_vs_random(void) {
         }
 
 
-        node_t *legal_moves = get_all_possible_moves(board); // todo change to legal
+        node_t *legal_moves = get_all_legal_moves(board); 
 
 
-        int r = 1 + rand() % 10; // todo change to length of list
+        int num_possible_moves = list_length(legal_moves);
+        assert(num_possible_moves != 0); // game over
+        int r = 1 + rand() % num_possible_moves; 
+        //int r = 1 + rand() % 2;  // weird segfault...
         node_t *current = legal_moves;
         for (int t=0; t<r; t++) {
             current = current->next;
@@ -203,8 +207,8 @@ void random_vs_random(void) {
 int main(void) {
     setlocale(LC_ALL, ""); // for special chars to work https://stackoverflow.com/questions/34538814/print-unicode-characters-in-c-using-ncurses
     initscr(); // ncurses built-in setup
-    human_vs_human();
-    //random_vs_random();
+    //human_vs_human();
+    random_vs_random();
     endwin(); // ncurses built-in cleanup
 
     return 0;
