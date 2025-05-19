@@ -6,6 +6,7 @@
 #include "pieces.h"
 #include "moves.h"
 
+
 int turn = WHITE;
 
 node_t *create_node(move_t move){
@@ -254,7 +255,7 @@ node_t *get_possible_pawn_moves(square_t board[8][8], int x, int y) {
     return possible_moves;
 }
 
-void highlight_moves(square_t board[8][8], node_t *possible_moves) {
+void highlight_moves(square_t board[8][8], node_t *possible_moves) { // todo chaange to legal
     node_t *current = possible_moves;
     while (current->next != NULL) {
         current = current->next;
@@ -268,14 +269,10 @@ void highlight_moves(square_t board[8][8], node_t *possible_moves) {
 }
 
 
-void highlight_legal_moves(square_t board[8][8], int x, int y) {
+node_t *get_piece_possible_moves(square_t board[8][8], int x, int y) {
     piece_t piece = board[x][y].piece;
-
-    if (piece.colour != turn) {
-        return;
-    }
-
     node_t *possible_moves = NULL;
+
     switch (piece.piece) {
         case ROOK:
             possible_moves = get_possible_rook_moves(board, x, y);
@@ -296,15 +293,57 @@ void highlight_legal_moves(square_t board[8][8], int x, int y) {
             possible_moves = get_possible_knight_moves(board, x, y);
             break;
     }
-
     assert (possible_moves != NULL);
+    return  possible_moves;
+}
+
+node_t *get_piece_legal_moves(square_t board[8][8], int x, int y) {
+    //piece_t piece = board[x][y].piece;
+    node_t *possible_moves = get_piece_possible_moves(board, x, y);
+
+    
+    // check if legal
+    node_t *legal_moves = malloc(sizeof(node_t));
+    legal_moves->next = NULL;
+
+    node_t *current = possible_moves;
+    while (current->next != NULL) {
+        current = current->next;
+        move_t move = current->move;
+
+        square_t board_copy[8][8];
+        for (int i=0; i<8; i++) {
+            for (int j=0; j<8; j++) {
+                board_copy[i][j] = board[i][j];
+            }
+        }
+        // play the move, and see if we are check
+        move_piece(board_copy, move);
+        if (is_check(board_copy) == false) {
+            push_end(legal_moves, move);
+        }
+    }
+
+    destroy_list(possible_moves);
+    return legal_moves;
+}
+
+void highlight_legal_moves(square_t board[8][8], int x, int y) {
+    piece_t piece = board[x][y].piece;
+
+    if (piece.colour != turn) {
+        return;
+    }
+
+    //node_t *possible_moves = get_piece_possible_moves(board, x, y);
+    node_t *possible_moves = get_piece_legal_moves(board, x, y);
     highlight_moves(board, possible_moves);
     destroy_list(possible_moves);
 }
 
-node_t *get_all_legal_moves(square_t board[8][8]) {
-    node_t *all_legal_moves= malloc(sizeof(node_t));
-    all_legal_moves->next = NULL;
+node_t *get_all_possible_moves(square_t board[8][8]) {
+    node_t *all_possible_moves = malloc(sizeof(node_t));
+    all_possible_moves->next = NULL;
 
     for (int x=0; x<8; x++) {
         for (int y=0; y<8; y++) {
@@ -314,40 +353,69 @@ node_t *get_all_legal_moves(square_t board[8][8]) {
                 continue;
             }
 
-            node_t *possible_moves = NULL;
-            switch (piece.piece) {
-                case ROOK:
-                    possible_moves = get_possible_rook_moves(board, x, y);
-                    break;
-                case KING:
-                    possible_moves = get_possible_king_moves(board, x, y);
-                    break;
-                case QUEEN:
-                    possible_moves = get_possible_queen_moves(board, x, y);
-                    break;
-                case PAWN:
-                    possible_moves = get_possible_pawn_moves(board, x, y);
-                    break;
-                case BISHOP:
-                    possible_moves = get_possible_bishop_moves(board, x, y);
-                    break;
-                case KNIGHT:
-                    possible_moves = get_possible_knight_moves(board, x, y);
-                    break;
-            }
-
+            node_t *possible_moves = get_piece_possible_moves(board, x, y);
             assert (possible_moves != NULL);
 
             node_t *current = possible_moves;
             while (current->next != NULL) {
                 current = current->next;
                 move_t move_copy = {current->move.start_x, current->move.start_y, current->move.end_x, current->move.end_y};
-                push_end(all_legal_moves, move_copy);
+                push_end(all_possible_moves, move_copy);
             }
 
             destroy_list(possible_moves);
         }
     }
 
+    return all_possible_moves;
+}
+
+
+bool is_check(square_t board[8][8]) {
+    turn *= -1;
+    node_t *legal_moves = get_all_possible_moves(board);
+    turn *= -1;
+
+    node_t *current = legal_moves;
+    while (current->next != NULL) {
+        current = current->next;
+        int end_x = current->move.end_x;
+        int end_y = current->move.end_y;
+        if (board[end_x][end_y].piece.piece == KING) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/*
+node_t *get_all_legal_moves(square_t board[8][8]) {
+    node_t *all_legal_moves = malloc(sizeof(node_t));
+    all_legal_moves->next = NULL;
+
+    node_t *all_possible_moves = get_all_possible_moves(board);
+    node_t *current = all_possible_moves;
+    while (current->next != NULL) {
+        current = current->next;
+        move_t move = current->move;
+
+        // play the move, and see if we are check
+        square_t board_copy[8][8];
+        for (int i=0; i<8; i++) {
+            for (int j=0; j<8; j++) {
+                board_copy[i][i] = board[i][j];
+            }
+        }
+        move_piece(board_copy, move);
+        if (is_check(board_copy) == false) {
+            push_end(all_legal_moves, move);
+        }
+    }
+
+    destroy_list(all_possible_moves);
     return all_legal_moves;
 }
+*/
+
+// todo change legal_moves to possible_moves and then make a new lega_moves function

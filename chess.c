@@ -45,7 +45,6 @@ void draw_board(square_t board[8][8]) {
             }
             piece_t piece = board[i][j].piece;
             mvwaddstr(stdscr, 15 - 2*j, 6 + 4*i, piece.unicode_char);
-            refresh();
         }
     }
     attrset(A_NORMAL);
@@ -137,6 +136,7 @@ void human_vs_human(void) {
 
                     if (previous_piece.colour == turn) { // is our turn
                         if (current_piece.colour != turn) { // can not capture own piece
+                            // todo, is_legal, use a list_contains function (which needs to check all elemnts of the struct)
                             move_t move = {previous_x, previous_y, x, y};
                             move_piece(board, move);
                             turn *= -1;
@@ -148,8 +148,19 @@ void human_vs_human(void) {
             }
         }
 
+        if (is_check(board)) {
+            mvwaddstr(stdscr, 20, 3, "check");
+        } else {
+            mvwaddstr(stdscr, 20, 3, "     ");
+        }
+
+        if (turn == WHITE) {
+            mvwaddstr(stdscr, 23, 3, "white's turn");
+        } else if (turn == BLACK) {
+            mvwaddstr(stdscr, 23, 3, "black's turn");
+        }
+
         draw_board(board);
-        refresh();
     }
 }
 
@@ -162,7 +173,6 @@ void random_vs_random(void) {
     draw_border();
     initalise_board(board);
     draw_board(board);
-    refresh();
 
     while (true) {
         int c = getch();
@@ -172,7 +182,7 @@ void random_vs_random(void) {
         }
 
 
-        node_t *legal_moves = get_all_legal_moves(board);
+        node_t *legal_moves = get_all_possible_moves(board); // todo change to legal
 
 
         int r = 1 + rand() % 10; // todo change to length of list
@@ -186,7 +196,6 @@ void random_vs_random(void) {
 
         turn *= -1;
         draw_board(board);
-        refresh();
     }
 }
 
@@ -194,8 +203,8 @@ void random_vs_random(void) {
 int main(void) {
     setlocale(LC_ALL, ""); // for special chars to work https://stackoverflow.com/questions/34538814/print-unicode-characters-in-c-using-ncurses
     initscr(); // ncurses built-in setup
-    //human_vs_human();
-    random_vs_random();
+    human_vs_human();
+    //random_vs_random();
     endwin(); // ncurses built-in cleanup
 
     return 0;
