@@ -108,6 +108,24 @@ void remove_highlights(square_t board[8][8]) {
     }
 }
 
+
+void game_over(square_t board[8][8]) {
+    int c;
+    if (is_check(board)) {
+        mvwaddstr(stdscr, 20, 3, "checkmate");
+    } else {
+        mvwaddstr(stdscr, 20, 3, "stalemate");
+    }
+    refresh();
+    while (true) {
+        c = getch();
+        if (c == 'q') {
+            return;
+        }
+    }
+}
+
+
 void human_vs_human(void) {
     square_t board[8][8];
     int previous_x = -1;
@@ -131,8 +149,14 @@ void human_vs_human(void) {
 
     MEVENT event;
     while (true) {
-        int c = getch();
+        node_t *legal_moves = get_all_legal_moves(board); 
+        int num_possible_moves = list_length(legal_moves);
+        if (num_possible_moves == 0) {
+            game_over(board);
+            return;
+        }
 
+        int c = getch();
         if (c == 'q') {
             return;
         }
@@ -210,9 +234,12 @@ void random_vs_random(void) {
 
 
         node_t *legal_moves = get_all_legal_moves(board); 
-
         int num_possible_moves = list_length(legal_moves);
-        assert(num_possible_moves != 0); // game over
+        if (num_possible_moves == 0) {
+            game_over(board);
+            return;
+        }
+
         int r = 1 + rand() % num_possible_moves; 
         node_t *current = legal_moves;
         for (int t=0; t<r; t++) {
@@ -230,8 +257,8 @@ int main(void) {
     setlocale(LC_ALL, ""); // for special chars to work https://stackoverflow.com/questions/34538814/print-unicode-characters-in-c-using-ncurses
     initscr(); // ncurses built-in setup
 
-    //human_vs_human();
-    random_vs_random();
+    human_vs_human();
+    //random_vs_random();
 
     endwin(); // ncurses built-in cleanup
     return 0;
