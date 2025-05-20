@@ -125,11 +125,10 @@ void game_over(square_t board[8][8]) {
     }
 }
 
-
-void human_vs_human(void) {
-    square_t board[8][8];
-    int previous_x = -1;
-    int previous_y = -1;
+void setup() {
+    srand(1234);
+    setlocale(LC_ALL, ""); // for special chars to work https://stackoverflow.com/questions/34538814/print-unicode-characters-in-c-using-ncurses
+    initscr(); // ncurses built-in setup
 
     start_color();
     init_pair(1, COLOR_MAGENTA, COLOR_BLACK);
@@ -137,17 +136,24 @@ void human_vs_human(void) {
     init_pair(3, COLOR_RED, COLOR_BLACK);
 
     curs_set(0); // hide cursor
-    draw_border();
-    initalise_board(board);
-    draw_board(board);
-
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
     mousemask(ALL_MOUSE_EVENTS, NULL);
     mouseinterval(0);
 
+    draw_border();
+}
+
+void human_vs_human(void) {
+    int previous_x = -1;
+    int previous_y = -1;
     MEVENT event;
+    square_t board[8][8];
+
+    initalise_board(board);
+    remove_highlights(board);
+    draw_board(board);
     while (true) {
         node_t *legal_moves = get_all_legal_moves(board); 
         int num_possible_moves = list_length(legal_moves);
@@ -208,36 +214,19 @@ void human_vs_human(void) {
 void random_vs_random(void) {
     square_t board[8][8];
 
-    start_color();
-    init_pair(1, COLOR_MAGENTA, COLOR_BLACK);
-    init_pair(2, COLOR_GREEN, COLOR_BLACK);
-    init_pair(3, COLOR_RED, COLOR_BLACK);
-
-    curs_set(0); // hide cursor
-    draw_border();
     initalise_board(board);
+    remove_highlights(board);
     draw_board(board);
-    cbreak();
-    noecho();
-    keypad(stdscr, TRUE);
-    mousemask(ALL_MOUSE_EVENTS, NULL);
-    mouseinterval(0);
-
-
-
     while (true) {
-        int c = getch();
-
-        if (c == 'q') {
-            return;
-        }
-        remove_highlights(board);
-
-
         node_t *legal_moves = get_all_legal_moves(board); 
         int num_possible_moves = list_length(legal_moves);
         if (num_possible_moves == 0) {
             game_over(board);
+            return;
+        }
+
+        int c = getch();
+        if (c == 'q') {
             return;
         }
 
@@ -254,12 +243,10 @@ void random_vs_random(void) {
 
 
 int main(void) {
-    srand(1234);
-    setlocale(LC_ALL, ""); // for special chars to work https://stackoverflow.com/questions/34538814/print-unicode-characters-in-c-using-ncurses
-    initscr(); // ncurses built-in setup
+    setup();
 
-    human_vs_human();
-    //random_vs_random();
+    //human_vs_human();
+    random_vs_random();
 
     endwin(); // ncurses built-in cleanup
     return 0;
