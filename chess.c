@@ -5,6 +5,7 @@
 #include <assert.h>
 #include "pieces.h"
 #include "moves.h"
+#include "engine.h"
 
 void draw_border(void) {
     static char* border = "\
@@ -116,6 +117,7 @@ void game_over(square_t board[8][8]) {
     } else {
         mvwaddstr(stdscr, 20, 3, "stalemate");
     }
+    mvwaddstr(stdscr, 23, 3, "            ");
     refresh();
     while (true) {
         c = getch();
@@ -155,7 +157,7 @@ void human_vs_human(void) {
     remove_highlights(board);
     draw_board(board);
     while (true) {
-        node_t *legal_moves = get_all_legal_moves(board); 
+        movelist_node_t *legal_moves = get_all_legal_moves(board); 
         int num_possible_moves = list_length(legal_moves);
         if (num_possible_moves == 0) {
             game_over(board);
@@ -194,7 +196,7 @@ void human_vs_human(void) {
                     if (previous_piece.colour == turn) { // is our turn
                         if (current_piece.colour != turn) { // can not capture own piece
                             move_t move = {previous_x, previous_y, x, y};
-                            if (list_contains(legal_moves, move)) {
+                            if (movelist_contains(legal_moves, move)) {
                                 move_piece(board, move);
                                 turn *= -1;
                             }
@@ -218,24 +220,53 @@ void random_vs_random(void) {
     remove_highlights(board);
     draw_board(board);
     while (true) {
-        node_t *legal_moves = get_all_legal_moves(board); 
+        movelist_node_t *legal_moves = get_all_legal_moves(board); 
         int num_possible_moves = list_length(legal_moves);
         if (num_possible_moves == 0) {
             game_over(board);
             return;
         }
+        remove_highlights(board);
 
         int c = getch();
         if (c == 'q') {
             return;
         }
 
-        int r = 1 + rand() % num_possible_moves; 
-        node_t *current = legal_moves;
+        int r = rand() % num_possible_moves; 
+        movelist_node_t *current = legal_moves;
         for (int t=0; t<r; t++) {
             current = current->next;
         }
         move_piece(board, current->move);
+        turn *= -1;
+        draw_board(board);
+    }
+}
+
+void engine_vs_engine(void) {
+    square_t board[8][8];
+
+    initalise_board(board);
+    remove_highlights(board);
+    draw_board(board);
+    while (true) {
+        movelist_node_t *legal_moves = get_all_legal_moves(board); 
+        int num_possible_moves = list_length(legal_moves);
+        if (num_possible_moves == 0) {
+            game_over(board);
+            return;
+        }
+        remove_highlights(board);
+
+        int c = getch();
+        if (c == 'q') {
+            return;
+        }
+
+        move_t engine_move = get_engine_move(board);
+
+        move_piece(board, engine_move);
         turn *= -1;
         draw_board(board);
     }
@@ -246,7 +277,8 @@ int main(void) {
     setup();
 
     //human_vs_human();
-    random_vs_random();
+    //random_vs_random();
+    engine_vs_engine();
 
     endwin(); // ncurses built-in cleanup
     return 0;

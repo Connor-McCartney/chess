@@ -13,11 +13,11 @@ typedef struct Move {
 typedef struct Node {
     move_t move;
     struct Node *next;
-} node_t;
+} movelist_node_t;
 
 void move_piece(square_t board[8][8], move_t move);
 void highlight_legal_moves(square_t board[8][8], int x, int y);
-node_t *get_all_legal_moves(square_t board[8][8]);
+movelist_node_t *get_all_legal_moves(square_t board[8][8]);
 bool is_check(square_t board[8][8]);
-int list_length(node_t *head);
-bool list_contains(node_t *head, move_t check_move);
+int list_length(movelist_node_t *head);
+bool movelist_contains(movelist_node_t *head, move_t check_move);
