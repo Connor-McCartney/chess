@@ -322,6 +322,16 @@ movelist_node_t *get_piece_possible_moves(square_t board[8][8], int x, int y) {
     return possible_moves;
 }
 
+
+void copy_board(square_t board_copy[8][8], square_t board[8][8]) {
+    for (int i=0; i<8; i++) {
+        for (int j=0; j<8; j++) {
+            board_copy[i][j] = board[i][j];
+        }
+    }
+}
+
+
 movelist_node_t *get_piece_legal_moves(square_t board[8][8], int x, int y) {
     movelist_node_t *possible_moves = get_piece_possible_moves(board, x, y);
     movelist_node_t *legal_moves = NULL;
@@ -331,11 +341,7 @@ movelist_node_t *get_piece_legal_moves(square_t board[8][8], int x, int y) {
         move_t move = current->move;
 
         square_t board_copy[8][8];
-        for (int i=0; i<8; i++) {
-            for (int j=0; j<8; j++) {
-                board_copy[i][j] = board[i][j];
-            }
-        }
+        copy_board(board_copy, board);
 
         // play the move, and see if we are check
         move_piece(board_copy, move);

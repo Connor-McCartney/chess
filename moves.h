@@ -21,3 +21,4 @@ movelist_node_t *get_all_legal_moves(square_t board[8][8]);
 bool is_check(square_t board[8][8]);
 int list_length(movelist_node_t *head);
 bool movelist_contains(movelist_node_t *head, move_t check_move);
+void copy_board(square_t board_copy[8][8], square_t board[8][8]);
