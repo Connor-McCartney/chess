@@ -1,0 +1,7 @@
+/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/lib/libraylib.a
+/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/include/raylib.h
+/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/include/rlgl.h
+/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/include/raymath.h
+/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/lib/pkgconfig/raylib.pc
+/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/lib/cmake/raylib/raylib-config-version.cmake
+/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/lib/cmake/raylib/raylib-config.cmake

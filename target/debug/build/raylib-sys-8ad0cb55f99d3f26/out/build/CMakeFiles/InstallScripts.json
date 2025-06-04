@@ -1,0 +1,10 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/connor/Documents/rust-chess/target/debug/build/raylib-sys-8ad0cb55f99d3f26/out/build/cmake_install.cmake",
+		"/home/connor/Documents/rust-chess/target/debug/build/raylib-sys-8ad0cb55f99d3f26/out/build/raylib/cmake_install.cmake",
+		"/home/connor/Documents/rust-chess/target/debug/build/raylib-sys-8ad0cb55f99d3f26/out/build/raylib/external/glfw/cmake_install.cmake",
+		"/home/connor/Documents/rust-chess/target/debug/build/raylib-sys-8ad0cb55f99d3f26/out/build/raylib/external/glfw/src/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

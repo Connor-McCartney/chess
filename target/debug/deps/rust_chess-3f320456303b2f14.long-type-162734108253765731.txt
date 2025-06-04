@@ -1,0 +1,2 @@
+Cloned<std::slice::Iter<'_, (draw::Pieces, raylib::prelude::Texture2D)>>
+Cloned<core::slice::iter::Iter<'_, (draw::Pieces, texture::Texture2D)>>
