@@ -1,6 +1,26 @@
 use std::usize;
+use crate::draw::*;
 
-use crate::{draw::*, NULL_MOVE};
+
+pub const NULL_MOVE: Move = Move {
+    start_x: 99,
+    start_y: 99, 
+    end_x: 99, 
+    end_y: 99,
+    start_piece: BLANK_PIECE,
+    end_piece: BLANK_PIECE,
+};
+
+pub fn create_move(game_position: &Position, start_x: usize, start_y: usize, end_x: usize, end_y: usize) -> Move {
+    return Move {
+        start_x,
+        start_y,
+        end_x,
+        end_y,
+        start_piece: game_position.board[start_x][start_y].piece,
+        end_piece: game_position.board[end_x][end_y].piece,
+    };
+}
 
 pub fn is_move_en_passant(game_position: &mut Position, m: Move) -> bool {
     let start = game_position.board[m.start_x][m.start_y].piece;
@@ -27,6 +47,7 @@ pub fn move_piece(game_position: &mut Position, m: Move) {
             game_position.board[prev_move.end_x][prev_move.end_y].highlight = Highlights::NORMAL;
         }
     }
+
     // new previous move highlight
     game_position.board[m.start_x][m.start_y].highlight = Highlights::PREVIOUS;
     game_position.board[m.end_x][m.end_y].highlight = Highlights::PREVIOUS;
@@ -147,7 +168,7 @@ fn get_possible_knight_moves(game_position: &Position, x: i32, y: i32) -> Vec<Mo
                 continue;
             }
             if game_position.board[xx as usize][yy as usize].piece.colour != col {
-                let m = Move{start_x: x as usize, start_y: y as usize, end_x: xx as usize, end_y: yy as usize};
+                let m = create_move(game_position, x as usize, y as usize, xx as usize, yy as usize);
                 possible_moves.push(m);
             }
             if game_position.board[xx as usize][yy as usize].piece.colour != Colours::EMPTY {
@@ -173,7 +194,7 @@ fn get_possible_rook_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move
                 break;
             }
             if game_position.board[xx as usize][yy as usize].piece.colour != col {
-                let m = Move{start_x: x as usize, start_y: y as usize, end_x: xx as usize, end_y: yy as usize};
+                let m = create_move(game_position, x as usize, y as usize, xx as usize, yy as usize);
                 possible_moves.push(m);
             }
             if game_position.board[xx as usize][yy as usize].piece.colour != Colours::EMPTY {
@@ -200,7 +221,7 @@ fn get_possible_bishop_moves(game_position: &Position, x: i32, y: i32) -> Vec<Mo
                     break;
                 }
                 if game_position.board[xx as usize][yy as usize].piece.colour != col {
-                    let m = Move{start_x: x as usize, start_y: y as usize, end_x: xx as usize, end_y: yy as usize};
+                    let m = create_move(game_position, x as usize, y as usize, xx as usize, yy as usize);
                     possible_moves.push(m);
                 }
                 if game_position.board[xx as usize][yy as usize].piece.colour != Colours::EMPTY {
@@ -222,7 +243,7 @@ fn get_possible_pawn_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move
         for _ in 0..2 {
             yy += col as i32;
             if game_position.board[x as usize][yy as usize].piece.colour == Colours::EMPTY {
-                let m = Move{start_x: x as usize, start_y: y as usize, end_x: x as usize, end_y: yy as usize};
+                let m = create_move(game_position, x as usize, y as usize, x as usize, yy as usize);
                 possible_moves.push(m);
             } else {
                 break;
@@ -234,7 +255,7 @@ fn get_possible_pawn_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move
         yy += col as i32;
         if yy <= 7 && yy >= 0 {
             if game_position.board[x as usize][yy as usize].piece.colour == Colours::EMPTY {
-                let m = Move{start_x: x as usize, start_y: y as usize, end_x: x as usize, end_y: yy as usize};
+                let m = create_move(game_position, x as usize, y as usize, x as usize, yy as usize);
                 possible_moves.push(m);
             }
         }
@@ -246,13 +267,13 @@ fn get_possible_pawn_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move
         let yy = y + col as i32;
         if xx <= 7 && yy <= 7 && xx >= 0 && yy >= 0 {
             if game_position.board[xx as usize][yy as usize].piece.colour as i32 == -(col as i32) {
-                let m = Move{start_x: x as usize, start_y: y as usize, end_x: xx as usize, end_y: yy as usize};
+                let m = create_move(game_position, x as usize, y as usize, xx as usize, yy as usize);
                 possible_moves.push(m);
             }
             // en passant
             if xx == game_position.en_passant {
                 if (y == 3 && col == Colours::BLACK) || (y == 4 && col == Colours::WHITE) {
-                    let m = Move{start_x: x as usize, start_y: y as usize, end_x: xx as usize, end_y: yy as usize};
+                    let m = create_move(game_position, x as usize, y as usize, xx as usize, yy as usize);
                     possible_moves.push(m);
                 }
             }
@@ -277,7 +298,7 @@ fn get_possible_queen_moves(game_position: &Position, x: i32, y: i32) -> Vec<Mov
                     break
                 }
                 if game_position.board[xx as usize][yy as usize].piece.colour != col {
-                    let m = Move{start_x: x as usize, start_y: y as usize, end_x: xx as usize, end_y: yy as usize};
+                    let m = create_move(game_position, x as usize, y as usize, xx as usize, yy as usize);
                     possible_moves.push(m);
                 }
                 if game_position.board[xx as usize][yy as usize].piece.colour != Colours::EMPTY {
@@ -302,7 +323,7 @@ fn get_possible_king_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move
                 continue;
             }
             if game_position.board[xx as usize][yy as usize].piece.colour != col {
-                let m = Move{start_x: x as usize, start_y: y as usize, end_x: xx as usize, end_y: yy as usize};
+                let m = create_move(game_position, x as usize, y as usize, xx as usize, yy as usize);
                 possible_moves.push(m);
             }
             if game_position.board[xx as usize][yy as usize].piece.colour != Colours::EMPTY {
@@ -317,7 +338,7 @@ fn get_possible_king_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move
                 game_position.board[6][0].piece.colour == Colours::EMPTY &&
                 game_position.can_white_castle_kingside {
 
-            let m = Move{start_x: x as usize, start_y: y as usize, end_x: (x+2) as usize, end_y: y as usize};
+            let m = create_move(game_position, x as usize, y as usize, (x+2) as usize, y as usize);
             possible_moves.push(m);
         }
     }
@@ -325,7 +346,7 @@ fn get_possible_king_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move
         if game_position.board[5][7].piece.colour == Colours::EMPTY &&
                 game_position.board[6][7].piece.colour == Colours::EMPTY &&
                 game_position.can_black_castle_kingside {
-            let m = Move{start_x: x as usize, start_y: y as usize, end_x: (x+2) as usize, end_y: y as usize};
+            let m = create_move(game_position, x as usize, y as usize, (x+2) as usize, y as usize);
             possible_moves.push(m);
         }
     }
@@ -335,7 +356,7 @@ fn get_possible_king_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move
         if game_position.board[3][0].piece.colour == Colours::EMPTY &&
                 game_position.board[2][0].piece.colour == Colours::EMPTY &&
                 game_position.can_white_castle_queenside {
-            let m = Move{start_x: x as usize, start_y: y as usize, end_x: (x-2) as usize, end_y: y as usize};
+            let m = create_move(game_position, x as usize, y as usize, (x-2) as usize, y as usize);
             possible_moves.push(m);
         }
     }
@@ -343,7 +364,7 @@ fn get_possible_king_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move
         if game_position.board[3][7].piece.colour == Colours::EMPTY &&
                 game_position.board[2][7].piece.colour == Colours::EMPTY &&
                 game_position.can_black_castle_queenside {
-            let m = Move{start_x: x as usize, start_y: y as usize, end_x: (x-2) as usize, end_y: y as usize};
+            let m = create_move(game_position, x as usize, y as usize, (x-2) as usize, y as usize);
             possible_moves.push(m);
         }
     }

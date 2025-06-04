@@ -62,6 +62,8 @@ pub struct Move {
     pub start_y: usize, 
     pub end_x: usize,
     pub end_y: usize, 
+    pub start_piece: Piece, 
+    pub end_piece: Piece
 }
 
 #[derive(Clone, Eq, PartialEq)]
@@ -143,6 +145,14 @@ pub fn draw_board(rl: &mut RaylibHandle, thread: &RaylibThread, game_position: &
     d.clear_background(Color::from_hex("161512").unwrap());
     let width = 60;
     let mut square_colour: ffi::Color;
+
+
+    d.draw_text(&format!("turn: {}", game_position.turn), 500, 10, 20, Color::WHITE);
+    d.draw_text(&format!("en passant: {}", game_position.en_passant), 500, 30, 20, Color::WHITE);
+    d.draw_text(&format!("white o-o: {}", game_position.can_white_castle_kingside), 500, 50, 20, Color::WHITE);
+    d.draw_text(&format!("black o-o: {}", game_position.can_black_castle_kingside), 500, 70, 20, Color::WHITE);
+    d.draw_text(&format!("white o-o-o: {}", game_position.can_white_castle_queenside), 500, 90, 20, Color::WHITE);
+    d.draw_text(&format!("black o-o-o: {}", game_position.can_black_castle_queenside), 500, 110, 20, Color::WHITE);
 
     for x in 0..8 {
         for y in 0..8 {

@@ -7,7 +7,31 @@ use raylib::prelude::*;
 use raylib::consts::KeyboardKey::*;
 use std::collections::HashMap;
 
-const NULL_MOVE: Move = Move {start_x: 99, start_y: 99, end_x: 99, end_y: 99};
+fn undo_move(game_position: &mut Position) {
+    let l = game_position.move_history.len();
+    if l == 0 {
+        return;
+    }
+    let m = game_position.move_history.pop().unwrap();
+
+
+    // remove current highlight 
+    game_position.board[m.start_x][m.start_y].highlight = Highlights::NORMAL;
+    game_position.board[m.end_x][m.end_y].highlight = Highlights::NORMAL;
+
+    // normal move
+    let end = game_position.board[m.end_x][m.end_y];
+    game_position.board[m.start_x][m.start_y] = end;
+    game_position.board[m.end_x][m.end_y].piece = m.end_piece;
+
+
+    // add previous highlight
+    if l != 1 {
+        let m2 = game_position.move_history[l-2];
+        game_position.board[m2.start_x][m2.start_y].highlight = Highlights::PREVIOUS;
+        game_position.board[m2.end_x][m2.end_y].highlight = Highlights::PREVIOUS;
+    }
+}
 
 fn get_player_move(rl: &mut RaylibHandle, game_position: &mut Position, thread: &RaylibThread, piece_images_map: &HashMap<PieceNames, Texture2D>) -> Move {
     let mut previous_mouse_x = 99;
@@ -20,6 +44,10 @@ fn get_player_move(rl: &mut RaylibHandle, game_position: &mut Position, thread: 
 
         if rl.is_key_down(KEY_Q) {
             return NULL_MOVE;
+        }
+        if rl.is_key_pressed(KEY_U) {
+            undo_move(game_position);
+            game_position.turn *= -1;
         }
 
         if rl.is_mouse_button_pressed(MouseButton::MOUSE_BUTTON_LEFT) {
@@ -57,7 +85,7 @@ fn get_player_move(rl: &mut RaylibHandle, game_position: &mut Position, thread: 
             }
 
             // is legal
-            let m = Move {start_x: previous_mouse_x, start_y: 7 - previous_mouse_y, end_x: mouse_x, end_y: 7 - mouse_y};
+            let m = create_move(game_position, previous_mouse_x, 7-previous_mouse_y, mouse_x, 7-mouse_y);
             let all_legal_moves = get_all_legal_moves(game_position);
             if !all_legal_moves.contains(&m) {
                 continue;
@@ -71,7 +99,8 @@ fn get_player_move(rl: &mut RaylibHandle, game_position: &mut Position, thread: 
 fn main() {
     let (mut rl, thread) = raylib::init()
         //.size(960, 720)
-        .size(480, 480)
+        //.size(480, 480)
+        .size(780, 480)
         .title("Chess")
         .build();
 
