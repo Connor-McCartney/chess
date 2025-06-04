@@ -58,7 +58,7 @@ fn get_player_move(rl: &mut RaylibHandle, game_position: &mut Position, thread: 
 
             // is legal
             let m = Move {start_x: previous_mouse_x, start_y: 7 - previous_mouse_y, end_x: mouse_x, end_y: 7 - mouse_y};
-            let all_legal_moves = get_all_legal_moves(*game_position);
+            let all_legal_moves = get_all_legal_moves(game_position);
             if !all_legal_moves.contains(&m) {
                 continue;
             }
@@ -81,12 +81,12 @@ fn main() {
         board: game_board, 
         turn: 1, 
         dragged_piece: PieceNames::Blank, 
-        previous_move: NULL_MOVE, 
         en_passant: -1,
         can_white_castle_kingside: true, 
         can_white_castle_queenside: true,
         can_black_castle_kingside: true, 
         can_black_castle_queenside: true,
+        move_history: vec![],
     };
     initialise_board(&mut game_position);
 
@@ -97,7 +97,7 @@ fn main() {
         }
         move_piece(&mut game_position, my_move);
         game_position.turn *= -1;
-        game_position.previous_move = my_move;
+        game_position.move_history.push(my_move);
         draw_board(&mut rl, &thread, &mut game_position, &piece_images_map);
     }
 }

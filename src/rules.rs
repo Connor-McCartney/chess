@@ -19,10 +19,13 @@ pub fn is_move_en_passant(game_position: &mut Position, m: Move) -> bool {
 
 pub fn move_piece(game_position: &mut Position, m: Move) {
     // remove previous highlight
-    let prev_move = game_position.previous_move;
-    if prev_move != NULL_MOVE {
-        game_position.board[prev_move.start_x][prev_move.start_y].highlight = Highlights::NORMAL;
-        game_position.board[prev_move.end_x][prev_move.end_y].highlight = Highlights::NORMAL;
+    let l = game_position.move_history.len();
+    if l != 0 {
+        let prev_move = game_position.move_history[l-1];
+        if prev_move != NULL_MOVE {
+            game_position.board[prev_move.start_x][prev_move.start_y].highlight = Highlights::NORMAL;
+            game_position.board[prev_move.end_x][prev_move.end_y].highlight = Highlights::NORMAL;
+        }
     }
     // new previous move highlight
     game_position.board[m.start_x][m.start_y].highlight = Highlights::PREVIOUS;
@@ -130,7 +133,7 @@ pub fn move_piece(game_position: &mut Position, m: Move) {
 
 
 
-fn get_possible_knight_moves(game_position: Position, x: i32, y: i32) -> Vec<Move> {
+fn get_possible_knight_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move> {
     let col = game_position.board[x as usize][y as usize].piece.colour;
     let mut possible_moves = vec![];
     for i in -2..3_i32 {
@@ -155,7 +158,7 @@ fn get_possible_knight_moves(game_position: Position, x: i32, y: i32) -> Vec<Mov
     return possible_moves;
 }
 
-fn get_possible_rook_moves(game_position: Position, x: i32, y: i32) -> Vec<Move> {
+fn get_possible_rook_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move> {
     let col = game_position.board[x as usize][y as usize].piece.colour;
     let mut possible_moves = vec![];
     let up_down: Vec<i32> = vec![0, 0, -1, 1];
@@ -182,7 +185,7 @@ fn get_possible_rook_moves(game_position: Position, x: i32, y: i32) -> Vec<Move>
 }
 
 
-fn get_possible_bishop_moves(game_position: Position, x: i32, y: i32) -> Vec<Move> {
+fn get_possible_bishop_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move> {
     let col = game_position.board[x as usize][y as usize].piece.colour;
     let mut possible_moves = vec![];
 
@@ -209,7 +212,7 @@ fn get_possible_bishop_moves(game_position: Position, x: i32, y: i32) -> Vec<Mov
     return possible_moves
 }
 
-fn get_possible_pawn_moves(game_position: Position, x: i32, y: i32) -> Vec<Move> {
+fn get_possible_pawn_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move> {
     let col = game_position.board[x as usize][y as usize].piece.colour;
     let mut possible_moves = vec![];
 
@@ -259,7 +262,7 @@ fn get_possible_pawn_moves(game_position: Position, x: i32, y: i32) -> Vec<Move>
 }
 
 
-fn get_possible_queen_moves(game_position: Position, x: i32, y: i32) -> Vec<Move> {
+fn get_possible_queen_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move> {
     let col = game_position.board[x as usize][y as usize].piece.colour;
     let mut possible_moves = vec![];
 
@@ -287,7 +290,7 @@ fn get_possible_queen_moves(game_position: Position, x: i32, y: i32) -> Vec<Move
 }
 
 
-fn get_possible_king_moves(game_position: Position, x: i32, y: i32) -> Vec<Move> {
+fn get_possible_king_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move> {
     let col = game_position.board[x as usize][y as usize].piece.colour;
     let mut possible_moves = vec![];
 
@@ -348,7 +351,7 @@ fn get_possible_king_moves(game_position: Position, x: i32, y: i32) -> Vec<Move>
     return possible_moves
 }
 
-fn get_piece_possible_moves(game_position: Position, x: i32, y: i32) -> Vec<Move> {
+fn get_piece_possible_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move> {
     let possible_moves = match game_position.board[x as usize][y as usize].piece.piece_type {
         PieceTypes::KNIGHT => get_possible_knight_moves(game_position, x, y),
         PieceTypes::ROOK => get_possible_rook_moves(game_position, x, y), 
@@ -361,6 +364,7 @@ fn get_piece_possible_moves(game_position: Position, x: i32, y: i32) -> Vec<Move
     return possible_moves;
 }
 
+/*
 // just used for is_check
 pub fn get_all_possible_moves(game_position: Position) -> Vec<Move> {
     let mut all_possible_moves = vec![];
@@ -377,8 +381,9 @@ pub fn get_all_possible_moves(game_position: Position) -> Vec<Move> {
     }
     return all_possible_moves;
 }
+*/
 
-fn get_piece_legal_moves(game_position: Position, x: i32, y: i32) -> Vec<Move> {
+fn get_piece_legal_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move> {
     let possible_moves = get_piece_possible_moves(game_position, x, y);
     let mut legal_moves = vec![];
     for possible_move in possible_moves {
@@ -412,7 +417,7 @@ fn get_piece_legal_moves(game_position: Position, x: i32, y: i32) -> Vec<Move> {
 }
 
 
-pub fn get_all_legal_moves(game_position: Position) -> Vec<Move> {
+pub fn get_all_legal_moves(game_position: &Position) -> Vec<Move> {
     let mut all_legal_moves = vec![];
     for x in 0..8 {
         for y in 0..8 {
@@ -431,7 +436,7 @@ pub fn get_all_legal_moves(game_position: Position) -> Vec<Move> {
 
 pub fn highlight_piece_legal_moves(game_position: &mut Position, x: i32, y: i32) {
     game_position.board[x as usize][y as usize].highlight = Highlights::LEGAL;
-    for legal_move in get_piece_legal_moves(*game_position, x, y) {
+    for legal_move in get_piece_legal_moves(game_position, x, y) {
         let end_x = legal_move.end_x;
         let end_y = legal_move.end_y;
         game_position.board[end_x][end_y].highlight = Highlights::LEGAL;

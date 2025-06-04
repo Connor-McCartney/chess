@@ -64,18 +64,17 @@ pub struct Move {
     pub end_y: usize, 
 }
 
-#[derive(Copy, Clone, Eq, PartialEq)]
+#[derive(Clone, Eq, PartialEq)]
 pub struct Position {
     pub board:  [[Square; 8]; 8],
     pub turn: i8,
     pub dragged_piece: PieceNames,
-    pub previous_move: Move,
     pub en_passant: i32,
     pub can_white_castle_queenside: bool, 
     pub can_white_castle_kingside: bool,
     pub can_black_castle_queenside: bool,
     pub can_black_castle_kingside: bool,
-    // previous captured piece (could be empty), used for undomove
+    pub move_history: Vec<Move>, // for undo_move
 }
 
 

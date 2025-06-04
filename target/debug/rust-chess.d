@@ -1,1 +1,1 @@
-/home/connor/Documents/rust-chess/target/debug/rust-chess: /home/connor/Documents/rust-chess/src/draw.rs /home/connor/Documents/rust-chess/src/main.rs /home/connor/Documents/rust-chess/src/rules.rs
+/home/connor/Documents/chess/target/debug/rust-chess: /home/connor/Documents/chess/src/draw.rs /home/connor/Documents/chess/src/main.rs /home/connor/Documents/chess/src/rules.rs
