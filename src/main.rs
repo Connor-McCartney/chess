@@ -30,11 +30,23 @@ fn undo_move(game_position: &mut Position) {
         } else if game_position.turn == 1 {
             game_position.board[m.end_x][m.start_y].piece = WHITE_PAWN_PIECE;
         }
+
+        game_position.en_passant = m.end_x as i32;
         return;
+    } else {
+        // check if prev move was double pawn move
+        if l >= 2 {
+            let prev_move = game_position.move_history[l-2];
+            if is_double_pawn_move(prev_move) {
+                game_position.en_passant = prev_move.start_x as i32;
+            } else {
+                game_position.en_passant = -1;
+            }
+        }
     }
 
     // add previous highlight
-    if l != 1 {
+    if l >= 2 {
         let m2 = game_position.move_history[l-2];
         game_position.board[m2.start_x][m2.start_y].highlight = Highlights::PREVIOUS;
         game_position.board[m2.end_x][m2.end_y].highlight = Highlights::PREVIOUS;

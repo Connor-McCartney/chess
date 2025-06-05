@@ -22,6 +22,18 @@ pub fn create_move(game_position: &Position, start_x: usize, start_y: usize, end
     };
 }
 
+pub fn is_double_pawn_move(m: Move) -> bool {
+    if m.start_piece.piece_name == PieceNames::WhitePawn &&
+       m.start_y == 1 && m.end_y == 3 {
+        return true;
+    }
+    if m.start_piece.piece_name == PieceNames::BlackPawn &&
+       m.start_y == 6 && m.end_y == 4 {
+        return true;
+    }
+    return false;
+}
+
 pub fn is_move_en_passant(m: Move) -> bool {
     let start = m.start_piece;
     if start.piece_type != PieceTypes::PAWN {
@@ -95,11 +107,7 @@ pub fn move_piece(game_position: &mut Position, m: Move) {
     }
     
     // if a pawn moves 2 squares, it has the possibility of being captured en passant
-    let white_pawn_moved_2_squares = start.piece_type == PieceTypes::PAWN && start.colour == Colours::WHITE
-                                    && m.start_y == 1 && m.end_y == 3;
-    let black_pawn_moved_2_squares = start.piece_type == PieceTypes::PAWN && start.colour == Colours::BLACK
-                                    && m.start_y == 6 && m.end_y == 4;
-    if white_pawn_moved_2_squares || black_pawn_moved_2_squares {
+    if is_double_pawn_move(m) {
         game_position.en_passant = m.start_x as i32;
     } else {
         game_position.en_passant = -1;
