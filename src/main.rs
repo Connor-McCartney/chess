@@ -19,8 +19,7 @@ fn undo_move(game_position: &mut Position) {
     game_position.board[m.end_x][m.end_y].highlight = Highlights::NORMAL;
 
     // normal move
-    let end = game_position.board[m.end_x][m.end_y];
-    game_position.board[m.start_x][m.start_y] = end;
+    game_position.board[m.start_x][m.start_y].piece = m.start_piece;
     game_position.board[m.end_x][m.end_y].piece = m.end_piece;
 
     // en passant
@@ -34,7 +33,6 @@ fn undo_move(game_position: &mut Position) {
         game_position.en_passant = m.end_x as i32;
         return;
     } else {
-        // check if prev move was double pawn move
         if l >= 2 {
             let prev_move = game_position.move_history[l-2];
             if is_double_pawn_move(prev_move) {
@@ -42,7 +40,10 @@ fn undo_move(game_position: &mut Position) {
             } else {
                 game_position.en_passant = -1;
             }
+        } else {
+            game_position.en_passant = -1;
         }
+
     }
 
     // add previous highlight
@@ -131,6 +132,7 @@ fn main() {
         turn: 1, 
         dragged_piece: PieceNames::Blank, 
         en_passant: -1,
+        // todo, castling_rights_history
         can_white_castle_kingside: true, 
         can_white_castle_queenside: true,
         can_black_castle_kingside: true, 
