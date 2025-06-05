@@ -72,10 +72,7 @@ pub struct Position {
     pub turn: i8,
     pub dragged_piece: PieceNames,
     pub en_passant: i32,
-    pub can_white_castle_queenside: bool, 
-    pub can_white_castle_kingside: bool,
-    pub can_black_castle_queenside: bool,
-    pub can_black_castle_kingside: bool,
+    pub castling_rights_history: Vec<Vec<bool>>, // W o-o, B o-o, W o-o-o, B o-o-o
     pub move_history: Vec<Move>, // for undo_move
 }
 
@@ -149,10 +146,10 @@ pub fn draw_board(rl: &mut RaylibHandle, thread: &RaylibThread, game_position: &
 
     d.draw_text(&format!("turn: {}", game_position.turn), 500, 10, 20, Color::WHITE);
     d.draw_text(&format!("en passant: {}", game_position.en_passant), 500, 30, 20, Color::WHITE);
-    d.draw_text(&format!("white o-o: {}", game_position.can_white_castle_kingside), 500, 50, 20, Color::WHITE);
-    d.draw_text(&format!("black o-o: {}", game_position.can_black_castle_kingside), 500, 70, 20, Color::WHITE);
-    d.draw_text(&format!("white o-o-o: {}", game_position.can_white_castle_queenside), 500, 90, 20, Color::WHITE);
-    d.draw_text(&format!("black o-o-o: {}", game_position.can_black_castle_queenside), 500, 110, 20, Color::WHITE);
+    let l = game_position.castling_rights_history.len();
+    if l != 0 {
+        d.draw_text(&format!("castling: {:?}", game_position.castling_rights_history[l-1]), 500, 50, 20, Color::WHITE);
+    }
 
     for x in 0..8 {
         for y in 0..8 {

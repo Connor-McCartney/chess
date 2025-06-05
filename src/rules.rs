@@ -78,33 +78,44 @@ pub fn move_piece(game_position: &mut Position, m: Move) {
 
     /////////////////////////////////////////////////////////////////
 
+    let l = game_position.castling_rights_history.len();
+    let mut new_castling_rights: Vec<bool>;
+    if l == 0 {
+        new_castling_rights = vec![true, true, true, true]; // W o-o, B o-o, W o-o-o, B o-o-o
+    } else {
+        new_castling_rights = game_position.castling_rights_history[l-1].clone(); 
+    }
+
+
     // if we move a rook we can't castle anymore
-    if start.piece_type == PieceTypes::ROOK && start.colour == Colours::WHITE {
+    if start.piece_name == PieceNames::WhiteRook {
         if m.start_x == 0 && m.start_y == 0 {
-            game_position.can_white_castle_queenside = false;
+            new_castling_rights[2] = false;
         }
         if m.start_x == 7 && m.start_y == 0 {
-            game_position.can_white_castle_kingside = false;
+            new_castling_rights[0] = false;
         }
     }
-    if start.piece_type == PieceTypes::ROOK && start.colour == Colours::BLACK {
+    if start.piece_name == PieceNames::BlackRook {
         if m.start_x == 0 && m.start_y == 7 {
-            game_position.can_black_castle_queenside = false;
+            new_castling_rights[3] = false;
         }
         if m.start_x == 7 && m.start_y == 7 {
-            game_position.can_black_castle_kingside = false;
+            new_castling_rights[1] = false;
         }
     }
 
     // if we move a king we can't castle anymore
-    if start.piece_type == PieceTypes::KING && start.colour == Colours::WHITE {
-        game_position.can_white_castle_queenside = false;
-        game_position.can_white_castle_kingside = false;
+    if start.piece_name == PieceNames::WhiteKing {
+        new_castling_rights[2] = false;
+        new_castling_rights[0] = false;
     }
-    if start.piece_type == PieceTypes::KING && start.colour == Colours::BLACK {
-        game_position.can_black_castle_queenside = false;
-        game_position.can_black_castle_kingside = false;
+    if start.piece_name == PieceNames::BlackKing {
+        new_castling_rights[3] = false;
+        new_castling_rights[1] = false;
     }
+
+    game_position.castling_rights_history.push(new_castling_rights);
     
     // if a pawn moves 2 squares, it has the possibility of being captured en passant
     if is_double_pawn_move(m) {
@@ -351,11 +362,24 @@ fn get_possible_king_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move
         }
     }
 
+
+    let l = game_position.castling_rights_history.len();
+    let castling_rights: Vec<bool>;
+    if l == 0 {
+        castling_rights = vec![true, true, true, true]; 
+    } else {
+        castling_rights = game_position.castling_rights_history[l-1].clone(); 
+    }
+    let can_white_castle_kingside  = castling_rights[0];
+    let can_black_castle_kingside  = castling_rights[1];
+    let can_white_castle_queenside = castling_rights[2];
+    let can_black_castle_queenside = castling_rights[3];
+
     // castle kingside
     if col == Colours::WHITE {
         if game_position.board[5][0].piece.colour == Colours::EMPTY &&
                 game_position.board[6][0].piece.colour == Colours::EMPTY &&
-                game_position.can_white_castle_kingside {
+                can_white_castle_kingside {
 
             let m = create_move(game_position, x as usize, y as usize, (x+2) as usize, y as usize);
             possible_moves.push(m);
@@ -364,7 +388,7 @@ fn get_possible_king_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move
     if col == Colours::BLACK {
         if game_position.board[5][7].piece.colour == Colours::EMPTY &&
                 game_position.board[6][7].piece.colour == Colours::EMPTY &&
-                game_position.can_black_castle_kingside {
+                can_black_castle_kingside {
             let m = create_move(game_position, x as usize, y as usize, (x+2) as usize, y as usize);
             possible_moves.push(m);
         }
@@ -374,7 +398,7 @@ fn get_possible_king_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move
     if col == Colours::WHITE {
         if game_position.board[3][0].piece.colour == Colours::EMPTY &&
                 game_position.board[2][0].piece.colour == Colours::EMPTY &&
-                game_position.can_white_castle_queenside {
+                can_white_castle_queenside {
             let m = create_move(game_position, x as usize, y as usize, (x-2) as usize, y as usize);
             possible_moves.push(m);
         }
@@ -382,7 +406,7 @@ fn get_possible_king_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move
     if col == Colours::BLACK {
         if game_position.board[3][7].piece.colour == Colours::EMPTY &&
                 game_position.board[2][7].piece.colour == Colours::EMPTY &&
-                game_position.can_black_castle_queenside {
+                can_black_castle_queenside {
             let m = create_move(game_position, x as usize, y as usize, (x-2) as usize, y as usize);
             possible_moves.push(m);
         }

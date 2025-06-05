@@ -132,11 +132,7 @@ fn main() {
         turn: 1, 
         dragged_piece: PieceNames::Blank, 
         en_passant: -1,
-        // todo, castling_rights_history
-        can_white_castle_kingside: true, 
-        can_white_castle_queenside: true,
-        can_black_castle_kingside: true, 
-        can_black_castle_queenside: true,
+        castling_rights_history: vec![], // W o-o, B o-o, W o-o-o, B o-o-o
         move_history: vec![],
     };
     initialise_board(&mut game_position);
