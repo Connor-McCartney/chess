@@ -14,7 +14,6 @@ fn undo_move(game_position: &mut Position) {
     }
     let m = game_position.move_history.pop().unwrap();
 
-
     // remove current highlight 
     game_position.board[m.start_x][m.start_y].highlight = Highlights::NORMAL;
     game_position.board[m.end_x][m.end_y].highlight = Highlights::NORMAL;
@@ -24,6 +23,15 @@ fn undo_move(game_position: &mut Position) {
     game_position.board[m.start_x][m.start_y] = end;
     game_position.board[m.end_x][m.end_y].piece = m.end_piece;
 
+    // en passant
+    if is_move_en_passant(m) {
+        if game_position.turn == -1 {
+            game_position.board[m.end_x][m.start_y].piece = BLACK_PAWN_PIECE;
+        } else if game_position.turn == 1 {
+            game_position.board[m.end_x][m.start_y].piece = WHITE_PAWN_PIECE;
+        }
+        return;
+    }
 
     // add previous highlight
     if l != 1 {

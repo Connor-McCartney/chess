@@ -22,17 +22,26 @@ pub fn create_move(game_position: &Position, start_x: usize, start_y: usize, end
     };
 }
 
-pub fn is_move_en_passant(game_position: &mut Position, m: Move) -> bool {
-    let start = game_position.board[m.start_x][m.start_y].piece;
-    let end = game_position.board[m.end_x][m.end_y].piece;
+pub fn is_move_en_passant(m: Move) -> bool {
+    let start = m.start_piece;
     if start.piece_type != PieceTypes::PAWN {
-        return false;
-    }
-    if end.colour != Colours::EMPTY {
         return false;
     }
     if m.start_x == m.end_x  {
         return false;
+    }
+    if m.end_piece != BLANK_PIECE {
+        return false;
+    }
+    if start.colour == Colours::WHITE {
+        if m.start_y != 4 || m.end_y != 5 {
+            return false;
+        }
+    }
+    if start.colour == Colours::BLACK {
+        if m.start_y != 3 || m.end_y != 2 {
+            return false;
+        }
     }
     return true;
 }
@@ -111,11 +120,6 @@ pub fn move_piece(game_position: &mut Position, m: Move) {
         return;
     }
 
-    // en passant
-    if is_move_en_passant(game_position, m) {
-        game_position.board[m.end_x][m.end_y].piece = start; 
-        game_position.board[m.end_x][m.start_y].piece = empty; 
-    }
 
     // castling
     if start.piece_type == PieceTypes::KING {
@@ -150,6 +154,13 @@ pub fn move_piece(game_position: &mut Position, m: Move) {
     // regular moves
     game_position.board[m.end_x][m.end_y].piece = start; // piece at end becomes piece at start
     game_position.board[m.start_x][m.start_y].piece = empty; // piece at start becomes empty
+
+
+    // en passant
+    if is_move_en_passant(m) {
+        game_position.board[m.end_x][m.start_y].piece = empty; 
+    }
+
 }
 
 
