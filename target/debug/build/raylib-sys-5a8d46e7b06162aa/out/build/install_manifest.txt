@@ -1,0 +1,7 @@
+/home/connor/Documents/chess/target/debug/build/raylib-sys-5a8d46e7b06162aa/out/lib/libraylib.a
+/home/connor/Documents/chess/target/debug/build/raylib-sys-5a8d46e7b06162aa/out/include/raylib.h
+/home/connor/Documents/chess/target/debug/build/raylib-sys-5a8d46e7b06162aa/out/include/rlgl.h
+/home/connor/Documents/chess/target/debug/build/raylib-sys-5a8d46e7b06162aa/out/include/raymath.h
+/home/connor/Documents/chess/target/debug/build/raylib-sys-5a8d46e7b06162aa/out/lib/pkgconfig/raylib.pc
+/home/connor/Documents/chess/target/debug/build/raylib-sys-5a8d46e7b06162aa/out/lib/cmake/raylib/raylib-config-version.cmake
+/home/connor/Documents/chess/target/debug/build/raylib-sys-5a8d46e7b06162aa/out/lib/cmake/raylib/raylib-config.cmake

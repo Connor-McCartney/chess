@@ -38,14 +38,14 @@ pub enum Highlights {
     CHECK,
 }
 
-#[derive(Copy, Clone, Eq, PartialEq)]
+#[derive(Copy, Clone, Eq, PartialEq, Hash)]
 pub enum Colours {
     WHITE = 1,
     EMPTY = 0,
     BLACK = -1
 }
 
-#[derive(Copy, Clone, Eq, PartialEq)]
+#[derive(Copy, Clone, Eq, PartialEq, Hash)]
 pub struct Piece {
     pub piece_name: PieceNames,
     pub piece_type: PieceTypes,
@@ -58,7 +58,7 @@ pub struct Square {
     pub highlight: Highlights
 }
 
-#[derive(Copy, Clone, Eq, PartialEq)]
+#[derive(Copy, Clone, Eq, PartialEq, Hash)]
 pub struct Move {
     pub start_x: usize,
     pub start_y: usize, 
