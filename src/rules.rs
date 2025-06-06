@@ -428,9 +428,8 @@ fn get_piece_possible_moves(game_position: &Position, x: i32, y: i32) -> Vec<Mov
     return possible_moves;
 }
 
-/*
 // just used for is_check
-pub fn get_all_possible_moves(game_position: Position) -> Vec<Move> {
+fn get_all_possible_moves(game_position: &Position) -> Vec<Move> {
     let mut all_possible_moves = vec![];
     for x in 0..8 {
         for y in 0..8 {
@@ -445,14 +444,123 @@ pub fn get_all_possible_moves(game_position: Position) -> Vec<Move> {
     }
     return all_possible_moves;
 }
-*/
 
-fn get_piece_legal_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move> {
+
+fn is_square_check(game_position: &mut Position, x: i32, y: i32) -> bool {
+    game_position.turn *= -1;
+    let possible_moves = get_all_possible_moves(game_position);
+    game_position.turn *= -1;
+    for possible_move in possible_moves {
+        if possible_move.end_x == x as usize && possible_move.end_y == y as usize {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+fn get_king_position(game_position: &Position) -> Vec<usize> {
+    for x in 0..8 {
+        for y in 0..8 {
+            if game_position.board[x][y].piece.piece_type == PieceTypes::KING &&
+                game_position.board[x][y].piece.colour as i8 == game_position.turn {
+                return vec![x, y];
+            }
+        }
+    }
+    unreachable!();
+}
+
+fn is_check(game_position: &mut Position) -> bool {
+    let king_position = get_king_position(game_position);
+    return is_square_check(game_position, king_position[0] as i32, king_position[1] as i32)
+}
+
+
+pub fn undo_move(game_position: &mut Position) {
+    let l = game_position.move_history.len();
+    if l == 0 {
+        return;
+    }
+
+    game_position.turn *= -1;
+    game_position.castling_rights_history.pop();
+    let m = game_position.move_history.pop().unwrap();
+
+    // remove current highlight 
+    game_position.board[m.start_x][m.start_y].highlight = Highlights::NORMAL;
+    game_position.board[m.end_x][m.end_y].highlight = Highlights::NORMAL;
+
+    // normal move
+    game_position.board[m.start_x][m.start_y].piece = m.start_piece;
+    game_position.board[m.end_x][m.end_y].piece = m.end_piece;
+
+    if m.start_piece.piece_name == PieceNames::WhiteKing && m.start_x == 4 {
+        // white kingside castle
+        if m.end_x == 6 {
+            game_position.board[5][0].piece = BLANK_PIECE;
+            game_position.board[7][0].piece = WHITE_ROOK_PIECE;
+        }
+
+        // white queenside castle
+        if m.end_x == 2 {
+            game_position.board[3][0].piece = BLANK_PIECE;
+            game_position.board[0][0].piece = WHITE_ROOK_PIECE;
+        }
+    }
+
+    if m.start_piece.piece_name == PieceNames::BlackKing && m.start_x == 4 {
+        // black kingside castle
+        if m.end_x == 6 {
+            game_position.board[5][7].piece = BLANK_PIECE;
+            game_position.board[7][7].piece = BLACK_ROOK_PIECE;
+        }
+
+        // black queenside castle
+        if m.end_x == 2 {
+            game_position.board[3][7].piece = BLANK_PIECE;
+            game_position.board[0][7].piece = BLACK_ROOK_PIECE;
+        }
+    }
+
+    // en passant
+    if is_move_en_passant(m) {
+        if game_position.turn == -1 {
+            game_position.board[m.end_x][m.start_y].piece = BLACK_PAWN_PIECE;
+        } else if game_position.turn == 1 {
+            game_position.board[m.end_x][m.start_y].piece = WHITE_PAWN_PIECE;
+        }
+
+        game_position.en_passant = m.end_x as i32;
+        return;
+    } else {
+        if l >= 2 {
+            let prev_move = game_position.move_history[l-2];
+            if is_double_pawn_move(prev_move) {
+                game_position.en_passant = prev_move.start_x as i32;
+            } else {
+                game_position.en_passant = -1;
+            }
+        } else {
+            game_position.en_passant = -1;
+        }
+
+    }
+
+    // add previous highlight
+    if l >= 2 {
+        let m2 = game_position.move_history[l-2];
+        game_position.board[m2.start_x][m2.start_y].highlight = Highlights::PREVIOUS;
+        game_position.board[m2.end_x][m2.end_y].highlight = Highlights::PREVIOUS;
+    }
+}
+
+fn get_piece_legal_moves(game_position: &mut Position, x: i32, y: i32) -> Vec<Move> {
     let possible_moves = get_piece_possible_moves(game_position, x, y);
     let mut legal_moves = vec![];
     for possible_move in possible_moves {
-        //game_position_copy = copy_position(game_position);
-        //move_piece(game_position_copy, possible_move);
+        move_piece(game_position, possible_move);
+
 
         /*
         # if castling, ensure we don't move through check
@@ -469,19 +577,27 @@ fn get_piece_legal_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move> 
                 if possible_move.end_x == 2: # queenside
                     if is_square_check(game_position_copy, 4, yy) or is_square_check(game_position_copy, 3, yy):
                         continue
-
-        # ensure we don't move into check
-        if is_check(game_position_copy): 
-            continue
         */
 
+        // ensure we don't move into check
+        if is_check(game_position) {
+            game_position.turn *= -1;
+            game_position.move_history.push(possible_move);
+            undo_move(game_position);
+            continue;
+        }
+
+
+        game_position.turn *= -1;
+        game_position.move_history.push(possible_move);
+        undo_move(game_position);
         legal_moves.push(possible_move);
     }
     return legal_moves;
 }
 
 
-pub fn get_all_legal_moves(game_position: &Position) -> Vec<Move> {
+pub fn get_all_legal_moves(game_position: &mut Position) -> Vec<Move> {
     let mut all_legal_moves = vec![];
     for x in 0..8 {
         for y in 0..8 {
