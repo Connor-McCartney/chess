@@ -1,5 +1,6 @@
 use raylib::prelude::*;
 use std::collections::HashMap;
+use crate::rules::*;
 
 #[derive(Copy, Clone, Hash, Eq, PartialEq)]
 pub enum PieceNames {
@@ -34,6 +35,7 @@ pub enum Highlights {
     NORMAL,
     PREVIOUS,
     LEGAL,
+    CHECK,
 }
 
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -135,7 +137,7 @@ pub fn initialise_board(game_position: &mut Position)  {
     game_position.board[7][7].piece = BLACK_ROOK_PIECE;
 }
 
-pub fn draw_board(rl: &mut RaylibHandle, thread: &RaylibThread, game_position: &mut Position, piece_images_map: &HashMap<PieceNames, Texture2D>)  {
+pub fn draw_board(rl: &mut RaylibHandle, thread: &RaylibThread, game_position: &mut Position, piece_images_map: &HashMap<PieceNames, Texture2D>, game_over: bool)  {
     let mouse_x = rl.get_mouse_x();
     let mouse_y = rl.get_mouse_y();
     let mut d = rl.begin_drawing(&thread);
@@ -143,13 +145,16 @@ pub fn draw_board(rl: &mut RaylibHandle, thread: &RaylibThread, game_position: &
     let width = 60;
     let mut square_colour: ffi::Color;
 
-
-    d.draw_text(&format!("turn: {}", game_position.turn), 500, 10, 20, Color::WHITE);
-    d.draw_text(&format!("en passant: {}", game_position.en_passant), 500, 30, 20, Color::WHITE);
-    let l = game_position.castling_rights_history.len();
-    if l != 0 {
-        d.draw_text(&format!("castling: {:?}", game_position.castling_rights_history[l-1]), 500, 50, 20, Color::WHITE);
+    let check: bool;
+    game_position.turn *= -1;
+    if is_check(game_position) {
+        check = true;
+        let king_position = get_king_position(game_position);
+        game_position.board[king_position[0]][king_position[1]].highlight = Highlights::CHECK;
+    } else {
+        check = false;
     }
+    game_position.turn *= -1;
 
     for x in 0..8 {
         for y in 0..8 {
@@ -170,6 +175,9 @@ pub fn draw_board(rl: &mut RaylibHandle, thread: &RaylibThread, game_position: &
                 Highlights::LEGAL => {
                     d.draw_rectangle(x*width, (7-y)*width, width, width, Color::GREEN.alpha(0.5));
                 }
+                Highlights::CHECK=> {
+                    d.draw_rectangle(x*width, (7-y)*width, width, width, Color::RED.alpha(0.5));
+                }
                 Highlights::NORMAL => {
                     // pass
                 }
@@ -188,6 +196,14 @@ pub fn draw_board(rl: &mut RaylibHandle, thread: &RaylibThread, game_position: &
                 let dragged_piece_image: &Texture2D = piece_images_map.get(&game_position.dragged_piece).unwrap();
                 d.draw_texture(&dragged_piece_image, mouse_x-30, mouse_y-30, Color::WHITE);
             }
+        }
+    }
+
+    if game_over {
+        if check {
+            d.draw_text("checkmate", 240-130, 240-25, 50, Color::RED);
+        } else {
+            d.draw_text("stalemate", 240-120, 240-25, 50, Color::RED);
         }
     }
 }

@@ -450,7 +450,7 @@ fn is_square_check(game_position: &mut Position, x: i32, y: i32) -> bool {
     return false;
 }
 
-fn get_king_position(game_position: &Position) -> Vec<usize> {
+pub fn get_king_position(game_position: &Position) -> Vec<usize> {
     for x in 0..8 {
         for y in 0..8 {
             if game_position.board[x][y].piece.piece_type == PieceTypes::KING &&
@@ -462,7 +462,7 @@ fn get_king_position(game_position: &Position) -> Vec<usize> {
     unreachable!();
 }
 
-fn is_check(game_position: &mut Position) -> bool {
+pub fn is_check(game_position: &mut Position) -> bool {
     let king_position = get_king_position(game_position);
     return is_square_check(game_position, king_position[0] as i32, king_position[1] as i32)
 }

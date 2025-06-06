@@ -14,7 +14,7 @@ fn get_player_move(rl: &mut RaylibHandle, game_position: &mut Position, thread: 
         let mouse_x = (rl.get_mouse_x() / 60) as usize;
         let mouse_y = (rl.get_mouse_y() / 60) as usize;
 
-        draw_board(rl, &thread, game_position, &piece_images_map);
+        draw_board(rl, &thread, game_position, &piece_images_map, false);
 
         if rl.is_key_down(KEY_Q) {
             return NULL_MOVE;
@@ -69,11 +69,24 @@ fn get_player_move(rl: &mut RaylibHandle, game_position: &mut Position, thread: 
     }
 }
 
+fn check_game_over(rl: &mut RaylibHandle, thread: &RaylibThread, game_position: &mut Position, piece_images_map: &HashMap<PieceNames, Texture2D>)  -> bool {
+    let game_over = get_all_legal_moves(game_position).len() == 0;
+    if game_over {
+        loop {
+            draw_board(rl, &thread, game_position, &piece_images_map, true);
+            if rl.is_key_down(KEY_Q) {
+                break;
+            }
+        }
+        return true;
+    } 
+    draw_board(rl, &thread, game_position, &piece_images_map, game_over);
+    return false;
+}
+
 fn main() {
     let (mut rl, thread) = raylib::init()
-        //.size(960, 720)
-        //.size(480, 480)
-        .size(780, 480)
+        .size(480, 480)
         .title("Chess")
         .build();
 
@@ -90,11 +103,25 @@ fn main() {
     initialise_board(&mut game_position);
 
     while !rl.window_should_close() {
-        let my_move: Move = get_player_move(&mut rl, &mut game_position, &thread, &piece_images_map); 
-        if my_move == NULL_MOVE {
+        // white's turn
+        let white_move: Move = get_player_move(&mut rl, &mut game_position, &thread, &piece_images_map); 
+        if white_move == NULL_MOVE {
             break;
         }
-        play_move(&mut game_position, my_move);
-        draw_board(&mut rl, &thread, &mut game_position, &piece_images_map);
+        play_move(&mut game_position, white_move);
+        if check_game_over(&mut rl, &thread, &mut game_position, &piece_images_map) {
+            break;
+        }
+
+        // black's turn
+        let black_move: Move = get_player_move(&mut rl, &mut game_position, &thread, &piece_images_map); 
+        if black_move == NULL_MOVE {
+            break;
+        }
+        play_move(&mut game_position, black_move);
+        if check_game_over(&mut rl, &thread, &mut game_position, &piece_images_map) {
+            break;
+        }
     }
 }
+
