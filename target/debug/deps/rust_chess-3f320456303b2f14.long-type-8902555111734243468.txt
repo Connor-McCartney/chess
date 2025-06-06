@@ -1,2 +1,0 @@
-raylib::ffi::Color: From<Result<raylib::prelude::Color, ParseIntError>>
-Result<raylib::prelude::Color, ParseIntError>
