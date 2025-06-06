@@ -12,6 +12,9 @@ fn undo_move(game_position: &mut Position) {
     if l == 0 {
         return;
     }
+
+    game_position.turn *= -1;
+    game_position.castling_rights_history.pop();
     let m = game_position.move_history.pop().unwrap();
 
     // remove current highlight 
@@ -21,6 +24,34 @@ fn undo_move(game_position: &mut Position) {
     // normal move
     game_position.board[m.start_x][m.start_y].piece = m.start_piece;
     game_position.board[m.end_x][m.end_y].piece = m.end_piece;
+
+    if m.start_piece.piece_name == PieceNames::WhiteKing && m.start_x == 4 {
+        // white kingside castle
+        if m.end_x == 6 {
+            game_position.board[5][0].piece = BLANK_PIECE;
+            game_position.board[7][0].piece = WHITE_ROOK_PIECE;
+        }
+
+        // white queenside castle
+        if m.end_x == 2 {
+            game_position.board[3][0].piece = BLANK_PIECE;
+            game_position.board[0][0].piece = WHITE_ROOK_PIECE;
+        }
+    }
+
+    if m.start_piece.piece_name == PieceNames::BlackKing && m.start_x == 4 {
+        // black kingside castle
+        if m.end_x == 6 {
+            game_position.board[5][7].piece = BLANK_PIECE;
+            game_position.board[7][7].piece = BLACK_ROOK_PIECE;
+        }
+
+        // black queenside castle
+        if m.end_x == 2 {
+            game_position.board[3][7].piece = BLANK_PIECE;
+            game_position.board[0][7].piece = BLACK_ROOK_PIECE;
+        }
+    }
 
     // en passant
     if is_move_en_passant(m) {
@@ -68,7 +99,6 @@ fn get_player_move(rl: &mut RaylibHandle, game_position: &mut Position, thread: 
         }
         if rl.is_key_pressed(KEY_U) {
             undo_move(game_position);
-            game_position.turn *= -1;
         }
 
         if rl.is_mouse_button_pressed(MouseButton::MOUSE_BUTTON_LEFT) {
