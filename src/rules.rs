@@ -1,7 +1,6 @@
 use std::usize;
 use crate::draw::*;
 
-
 pub const NULL_MOVE: Move = Move {
     start_x: 99,
     start_y: 99, 
@@ -320,7 +319,6 @@ fn get_possible_pawn_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move
 fn get_possible_queen_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move> {
     let col = game_position.board[x as usize][y as usize].piece.colour;
     let mut possible_moves = vec![];
-
     for i in [-1, 0, 1] {
         for j in [-1, 0, 1] {
             let mut yy = y;
@@ -348,7 +346,6 @@ fn get_possible_queen_moves(game_position: &Position, x: i32, y: i32) -> Vec<Mov
 fn get_possible_king_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move> {
     let col = game_position.board[x as usize][y as usize].piece.colour;
     let mut possible_moves = vec![];
-
     for i in [-1, 0, 1] {
         for j in [-1, 0, 1] {
             let yy = y + i;
@@ -365,8 +362,6 @@ fn get_possible_king_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move
             }
         }
     }
-
-
     let l = game_position.castling_rights_history.len();
     let castling_rights: Vec<bool>;
     if l == 0 {
@@ -378,13 +373,11 @@ fn get_possible_king_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move
     let can_black_castle_kingside  = castling_rights[1];
     let can_white_castle_queenside = castling_rights[2];
     let can_black_castle_queenside = castling_rights[3];
-
     // castle kingside
     if col == Colours::WHITE {
         if game_position.board[5][0].piece.colour == Colours::EMPTY &&
                 game_position.board[6][0].piece.colour == Colours::EMPTY &&
                 can_white_castle_kingside {
-
             let m = create_move(game_position, x as usize, y as usize, (x+2) as usize, y as usize);
             possible_moves.push(m);
         }
@@ -397,7 +390,6 @@ fn get_possible_king_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move
             possible_moves.push(m);
         }
     }
-
     // castle queenside
     if col == Colours::WHITE {
         if game_position.board[3][0].piece.colour == Colours::EMPTY &&
@@ -415,7 +407,6 @@ fn get_possible_king_moves(game_position: &Position, x: i32, y: i32) -> Vec<Move
             possible_moves.push(m);
         }
     }
-
     return possible_moves
 }
 
@@ -449,7 +440,6 @@ fn get_all_possible_moves(game_position: &Position) -> Vec<Move> {
     return all_possible_moves;
 }
 
-
 fn is_square_check(game_position: &mut Position, x: i32, y: i32) -> bool {
     let possible_moves = get_all_possible_moves(game_position);
     for possible_move in possible_moves {
@@ -459,7 +449,6 @@ fn is_square_check(game_position: &mut Position, x: i32, y: i32) -> bool {
     }
     return false;
 }
-
 
 fn get_king_position(game_position: &Position) -> Vec<usize> {
     for x in 0..8 {
@@ -477,7 +466,6 @@ fn is_check(game_position: &mut Position) -> bool {
     let king_position = get_king_position(game_position);
     return is_square_check(game_position, king_position[0] as i32, king_position[1] as i32)
 }
-
 
 pub fn undo_move(game_position: &mut Position) {
     let l = game_position.move_history.len();
@@ -546,7 +534,6 @@ pub fn undo_move(game_position: &mut Position) {
         } else {
             game_position.en_passant = -1;
         }
-
     }
 
     // add previous highlight
@@ -563,22 +550,30 @@ fn get_piece_legal_moves(game_position: &mut Position, x: i32, y: i32) -> Vec<Mo
     for possible_move in possible_moves {
         play_move(game_position, possible_move);
 
-        /*
-        # if castling, ensure we don't move through check
-        start = game_position.board[possible_move.start_x][possible_move.start_y].piece
-        if start.piece == Pieces.KING:
-            if start.colour == Colours.WHITE:
-                yy = 0
-            else:
-                yy = 7
-            if possible_move.start_x == 4 and possible_move.start_y == yy and possible_move.end_y == y:
-                if possible_move.end_x == 6: # kingside
-                    if is_square_check(game_position_copy, 4, yy) or is_square_check(game_position_copy, 5, yy):
+        // if castling, ensure we don't move through check
+        let start = possible_move.start_piece;
+        if start.piece_type == PieceTypes::KING {
+            let yy: i32;
+            if start.colour == Colours::WHITE {
+                yy = 0;
+            } else {
+                yy = 7;
+            }
+            if possible_move.start_x == 4 && possible_move.start_y as i32 == yy && possible_move.end_y as i32 == y {
+                if possible_move.end_x == 6 { // kingside
+                    if is_square_check(game_position, 4, yy) || is_square_check(game_position, 5, yy) {
+                        undo_move(game_position);
                         continue
-                if possible_move.end_x == 2: # queenside
-                    if is_square_check(game_position_copy, 4, yy) or is_square_check(game_position_copy, 3, yy):
-                        continue
-        */
+                    }
+                }
+                if possible_move.end_x == 2 { // queenside
+                    if is_square_check(game_position, 4, yy) || is_square_check(game_position, 3, yy) {
+                        undo_move(game_position);
+                        continue;
+                    }
+                }
+            }
+        }
 
         // ensure we don't move into check
         if is_check(game_position) {
@@ -586,13 +581,11 @@ fn get_piece_legal_moves(game_position: &mut Position, x: i32, y: i32) -> Vec<Mo
             continue;
         }
 
-
         undo_move(game_position);
         legal_moves.push(possible_move);
     }
     return legal_moves;
 }
-
 
 pub fn get_all_legal_moves(game_position: &mut Position) -> Vec<Move> {
     let mut all_legal_moves = vec![];
@@ -618,4 +611,3 @@ pub fn highlight_piece_legal_moves(game_position: &mut Position, x: i32, y: i32)
         game_position.board[end_x][end_y].highlight = Highlights::LEGAL;
     }
 }
-
