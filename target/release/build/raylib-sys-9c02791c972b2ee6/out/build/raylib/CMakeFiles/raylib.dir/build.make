@@ -56,7 +56,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build
+CMAKE_BINARY_DIR = /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build
 
 # Include any dependencies generated for this target.
 include raylib/CMakeFiles/raylib.dir/depend.make
@@ -75,100 +75,100 @@ raylib/CMakeFiles/raylib.dir/codegen:
 raylib/CMakeFiles/raylib.dir/raudio.c.o: raylib/CMakeFiles/raylib.dir/flags.make
 raylib/CMakeFiles/raylib.dir/raudio.c.o: /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/raudio.c
 raylib/CMakeFiles/raylib.dir/raudio.c.o: raylib/CMakeFiles/raylib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object raylib/CMakeFiles/raylib.dir/raudio.c.o"
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT raylib/CMakeFiles/raylib.dir/raudio.c.o -MF CMakeFiles/raylib.dir/raudio.c.o.d -o CMakeFiles/raylib.dir/raudio.c.o -c /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/raudio.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object raylib/CMakeFiles/raylib.dir/raudio.c.o"
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT raylib/CMakeFiles/raylib.dir/raudio.c.o -MF CMakeFiles/raylib.dir/raudio.c.o.d -o CMakeFiles/raylib.dir/raudio.c.o -c /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/raudio.c
 
 raylib/CMakeFiles/raylib.dir/raudio.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/raylib.dir/raudio.c.i"
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/raudio.c > CMakeFiles/raylib.dir/raudio.c.i
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/raudio.c > CMakeFiles/raylib.dir/raudio.c.i
 
 raylib/CMakeFiles/raylib.dir/raudio.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/raylib.dir/raudio.c.s"
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/raudio.c -o CMakeFiles/raylib.dir/raudio.c.s
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/raudio.c -o CMakeFiles/raylib.dir/raudio.c.s
 
 raylib/CMakeFiles/raylib.dir/rcore.c.o: raylib/CMakeFiles/raylib.dir/flags.make
 raylib/CMakeFiles/raylib.dir/rcore.c.o: /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rcore.c
 raylib/CMakeFiles/raylib.dir/rcore.c.o: raylib/CMakeFiles/raylib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object raylib/CMakeFiles/raylib.dir/rcore.c.o"
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT raylib/CMakeFiles/raylib.dir/rcore.c.o -MF CMakeFiles/raylib.dir/rcore.c.o.d -o CMakeFiles/raylib.dir/rcore.c.o -c /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rcore.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object raylib/CMakeFiles/raylib.dir/rcore.c.o"
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT raylib/CMakeFiles/raylib.dir/rcore.c.o -MF CMakeFiles/raylib.dir/rcore.c.o.d -o CMakeFiles/raylib.dir/rcore.c.o -c /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rcore.c
 
 raylib/CMakeFiles/raylib.dir/rcore.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/raylib.dir/rcore.c.i"
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rcore.c > CMakeFiles/raylib.dir/rcore.c.i
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rcore.c > CMakeFiles/raylib.dir/rcore.c.i
 
 raylib/CMakeFiles/raylib.dir/rcore.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/raylib.dir/rcore.c.s"
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rcore.c -o CMakeFiles/raylib.dir/rcore.c.s
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rcore.c -o CMakeFiles/raylib.dir/rcore.c.s
 
 raylib/CMakeFiles/raylib.dir/rmodels.c.o: raylib/CMakeFiles/raylib.dir/flags.make
 raylib/CMakeFiles/raylib.dir/rmodels.c.o: /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rmodels.c
 raylib/CMakeFiles/raylib.dir/rmodels.c.o: raylib/CMakeFiles/raylib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object raylib/CMakeFiles/raylib.dir/rmodels.c.o"
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT raylib/CMakeFiles/raylib.dir/rmodels.c.o -MF CMakeFiles/raylib.dir/rmodels.c.o.d -o CMakeFiles/raylib.dir/rmodels.c.o -c /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rmodels.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object raylib/CMakeFiles/raylib.dir/rmodels.c.o"
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT raylib/CMakeFiles/raylib.dir/rmodels.c.o -MF CMakeFiles/raylib.dir/rmodels.c.o.d -o CMakeFiles/raylib.dir/rmodels.c.o -c /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rmodels.c
 
 raylib/CMakeFiles/raylib.dir/rmodels.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/raylib.dir/rmodels.c.i"
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rmodels.c > CMakeFiles/raylib.dir/rmodels.c.i
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rmodels.c > CMakeFiles/raylib.dir/rmodels.c.i
 
 raylib/CMakeFiles/raylib.dir/rmodels.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/raylib.dir/rmodels.c.s"
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rmodels.c -o CMakeFiles/raylib.dir/rmodels.c.s
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rmodels.c -o CMakeFiles/raylib.dir/rmodels.c.s
 
 raylib/CMakeFiles/raylib.dir/rshapes.c.o: raylib/CMakeFiles/raylib.dir/flags.make
 raylib/CMakeFiles/raylib.dir/rshapes.c.o: /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rshapes.c
 raylib/CMakeFiles/raylib.dir/rshapes.c.o: raylib/CMakeFiles/raylib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object raylib/CMakeFiles/raylib.dir/rshapes.c.o"
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT raylib/CMakeFiles/raylib.dir/rshapes.c.o -MF CMakeFiles/raylib.dir/rshapes.c.o.d -o CMakeFiles/raylib.dir/rshapes.c.o -c /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rshapes.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object raylib/CMakeFiles/raylib.dir/rshapes.c.o"
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT raylib/CMakeFiles/raylib.dir/rshapes.c.o -MF CMakeFiles/raylib.dir/rshapes.c.o.d -o CMakeFiles/raylib.dir/rshapes.c.o -c /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rshapes.c
 
 raylib/CMakeFiles/raylib.dir/rshapes.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/raylib.dir/rshapes.c.i"
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rshapes.c > CMakeFiles/raylib.dir/rshapes.c.i
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rshapes.c > CMakeFiles/raylib.dir/rshapes.c.i
 
 raylib/CMakeFiles/raylib.dir/rshapes.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/raylib.dir/rshapes.c.s"
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rshapes.c -o CMakeFiles/raylib.dir/rshapes.c.s
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rshapes.c -o CMakeFiles/raylib.dir/rshapes.c.s
 
 raylib/CMakeFiles/raylib.dir/rtext.c.o: raylib/CMakeFiles/raylib.dir/flags.make
 raylib/CMakeFiles/raylib.dir/rtext.c.o: /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rtext.c
 raylib/CMakeFiles/raylib.dir/rtext.c.o: raylib/CMakeFiles/raylib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object raylib/CMakeFiles/raylib.dir/rtext.c.o"
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT raylib/CMakeFiles/raylib.dir/rtext.c.o -MF CMakeFiles/raylib.dir/rtext.c.o.d -o CMakeFiles/raylib.dir/rtext.c.o -c /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rtext.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object raylib/CMakeFiles/raylib.dir/rtext.c.o"
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT raylib/CMakeFiles/raylib.dir/rtext.c.o -MF CMakeFiles/raylib.dir/rtext.c.o.d -o CMakeFiles/raylib.dir/rtext.c.o -c /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rtext.c
 
 raylib/CMakeFiles/raylib.dir/rtext.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/raylib.dir/rtext.c.i"
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rtext.c > CMakeFiles/raylib.dir/rtext.c.i
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rtext.c > CMakeFiles/raylib.dir/rtext.c.i
 
 raylib/CMakeFiles/raylib.dir/rtext.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/raylib.dir/rtext.c.s"
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rtext.c -o CMakeFiles/raylib.dir/rtext.c.s
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rtext.c -o CMakeFiles/raylib.dir/rtext.c.s
 
 raylib/CMakeFiles/raylib.dir/rtextures.c.o: raylib/CMakeFiles/raylib.dir/flags.make
 raylib/CMakeFiles/raylib.dir/rtextures.c.o: /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rtextures.c
 raylib/CMakeFiles/raylib.dir/rtextures.c.o: raylib/CMakeFiles/raylib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object raylib/CMakeFiles/raylib.dir/rtextures.c.o"
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT raylib/CMakeFiles/raylib.dir/rtextures.c.o -MF CMakeFiles/raylib.dir/rtextures.c.o.d -o CMakeFiles/raylib.dir/rtextures.c.o -c /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rtextures.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object raylib/CMakeFiles/raylib.dir/rtextures.c.o"
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT raylib/CMakeFiles/raylib.dir/rtextures.c.o -MF CMakeFiles/raylib.dir/rtextures.c.o.d -o CMakeFiles/raylib.dir/rtextures.c.o -c /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rtextures.c
 
 raylib/CMakeFiles/raylib.dir/rtextures.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/raylib.dir/rtextures.c.i"
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rtextures.c > CMakeFiles/raylib.dir/rtextures.c.i
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rtextures.c > CMakeFiles/raylib.dir/rtextures.c.i
 
 raylib/CMakeFiles/raylib.dir/rtextures.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/raylib.dir/rtextures.c.s"
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rtextures.c -o CMakeFiles/raylib.dir/rtextures.c.s
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/rtextures.c -o CMakeFiles/raylib.dir/rtextures.c.s
 
 raylib/CMakeFiles/raylib.dir/utils.c.o: raylib/CMakeFiles/raylib.dir/flags.make
 raylib/CMakeFiles/raylib.dir/utils.c.o: /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/utils.c
 raylib/CMakeFiles/raylib.dir/utils.c.o: raylib/CMakeFiles/raylib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object raylib/CMakeFiles/raylib.dir/utils.c.o"
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT raylib/CMakeFiles/raylib.dir/utils.c.o -MF CMakeFiles/raylib.dir/utils.c.o.d -o CMakeFiles/raylib.dir/utils.c.o -c /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/utils.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object raylib/CMakeFiles/raylib.dir/utils.c.o"
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT raylib/CMakeFiles/raylib.dir/utils.c.o -MF CMakeFiles/raylib.dir/utils.c.o.d -o CMakeFiles/raylib.dir/utils.c.o -c /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/utils.c
 
 raylib/CMakeFiles/raylib.dir/utils.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/raylib.dir/utils.c.i"
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/utils.c > CMakeFiles/raylib.dir/utils.c.i
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/utils.c > CMakeFiles/raylib.dir/utils.c.i
 
 raylib/CMakeFiles/raylib.dir/utils.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/raylib.dir/utils.c.s"
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/utils.c -o CMakeFiles/raylib.dir/utils.c.s
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/utils.c -o CMakeFiles/raylib.dir/utils.c.s
 
 # Object files for target raylib
 raylib_OBJECTS = \
@@ -182,29 +182,29 @@ raylib_OBJECTS = \
 
 # External object files for target raylib
 raylib_EXTERNAL_OBJECTS = \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/context.c.o" \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/init.c.o" \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/input.c.o" \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/monitor.c.o" \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/platform.c.o" \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/vulkan.c.o" \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/window.c.o" \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/egl_context.c.o" \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o" \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/null_init.c.o" \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/null_monitor.c.o" \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/null_window.c.o" \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/null_joystick.c.o" \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/posix_module.c.o" \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/posix_time.c.o" \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o" \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/x11_init.c.o" \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/x11_monitor.c.o" \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/x11_window.c.o" \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/xkb_unicode.c.o" \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/glx_context.c.o" \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/linux_joystick.c.o" \
-"/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/posix_poll.c.o"
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/context.c.o" \
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/init.c.o" \
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/input.c.o" \
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/monitor.c.o" \
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/platform.c.o" \
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/vulkan.c.o" \
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/window.c.o" \
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/egl_context.c.o" \
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o" \
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/null_init.c.o" \
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/null_monitor.c.o" \
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/null_window.c.o" \
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/null_joystick.c.o" \
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/posix_module.c.o" \
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/posix_time.c.o" \
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o" \
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/x11_init.c.o" \
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/x11_monitor.c.o" \
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/x11_window.c.o" \
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/xkb_unicode.c.o" \
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/glx_context.c.o" \
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/linux_joystick.c.o" \
+"/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/glfw.dir/posix_poll.c.o"
 
 raylib/libraylib.a: raylib/CMakeFiles/raylib.dir/raudio.c.o
 raylib/libraylib.a: raylib/CMakeFiles/raylib.dir/rcore.c.o
@@ -238,19 +238,19 @@ raylib/libraylib.a: raylib/external/glfw/src/CMakeFiles/glfw.dir/linux_joystick.
 raylib/libraylib.a: raylib/external/glfw/src/CMakeFiles/glfw.dir/posix_poll.c.o
 raylib/libraylib.a: raylib/CMakeFiles/raylib.dir/build.make
 raylib/libraylib.a: raylib/CMakeFiles/raylib.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking C static library libraylib.a"
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && $(CMAKE_COMMAND) -P CMakeFiles/raylib.dir/cmake_clean_target.cmake
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/raylib.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking C static library libraylib.a"
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && $(CMAKE_COMMAND) -P CMakeFiles/raylib.dir/cmake_clean_target.cmake
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/raylib.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 raylib/CMakeFiles/raylib.dir/build: raylib/libraylib.a
 .PHONY : raylib/CMakeFiles/raylib.dir/build
 
 raylib/CMakeFiles/raylib.dir/clean:
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && $(CMAKE_COMMAND) -P CMakeFiles/raylib.dir/cmake_clean.cmake
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib && $(CMAKE_COMMAND) -P CMakeFiles/raylib.dir/cmake_clean.cmake
 .PHONY : raylib/CMakeFiles/raylib.dir/clean
 
 raylib/CMakeFiles/raylib.dir/depend:
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/CMakeFiles/raylib.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/CMakeFiles/raylib.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : raylib/CMakeFiles/raylib.dir/depend
 

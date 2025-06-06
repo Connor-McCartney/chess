@@ -56,7 +56,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build
+CMAKE_BINARY_DIR = /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build
 
 # Utility rule file for uninstall.
 
@@ -67,7 +67,7 @@ include CMakeFiles/uninstall.dir/compiler_depend.make
 include CMakeFiles/uninstall.dir/progress.make
 
 CMakeFiles/uninstall:
-	/usr/bin/cmake -P /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/cmake_uninstall.cmake
+	/usr/bin/cmake -P /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/cmake_uninstall.cmake
 
 CMakeFiles/uninstall.dir/codegen:
 .PHONY : CMakeFiles/uninstall.dir/codegen
@@ -85,6 +85,6 @@ CMakeFiles/uninstall.dir/clean:
 .PHONY : CMakeFiles/uninstall.dir/clean
 
 CMakeFiles/uninstall.dir/depend:
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles/uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles/uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/uninstall.dir/depend
 

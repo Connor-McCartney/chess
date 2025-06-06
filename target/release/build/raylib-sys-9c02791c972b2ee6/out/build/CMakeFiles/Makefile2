@@ -57,7 +57,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build
+CMAKE_BINARY_DIR = /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -147,14 +147,14 @@ raylib/external/glfw/src/clean: raylib/external/glfw/src/CMakeFiles/update_mappi
 CMakeFiles/uninstall.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num= "Built target uninstall"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num= "Built target uninstall"
 .PHONY : CMakeFiles/uninstall.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/uninstall.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/uninstall.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles 0
 .PHONY : CMakeFiles/uninstall.dir/rule
 
 # Convenience name for target.
@@ -164,7 +164,7 @@ uninstall: CMakeFiles/uninstall.dir/rule
 # codegen rule for target.
 CMakeFiles/uninstall.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num= "Finished codegen for target uninstall"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num= "Finished codegen for target uninstall"
 .PHONY : CMakeFiles/uninstall.dir/codegen
 
 # clean rule for target.
@@ -179,14 +179,14 @@ CMakeFiles/uninstall.dir/clean:
 raylib/CMakeFiles/raylib.dir/all: raylib/external/glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) $(MAKESILENT) -f raylib/CMakeFiles/raylib.dir/build.make raylib/CMakeFiles/raylib.dir/depend
 	$(MAKE) $(MAKESILENT) -f raylib/CMakeFiles/raylib.dir/build.make raylib/CMakeFiles/raylib.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=24,25,26,27,28,29,30,31 "Built target raylib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=24,25,26,27,28,29,30,31 "Built target raylib"
 .PHONY : raylib/CMakeFiles/raylib.dir/all
 
 # Build rule for subdir invocation for target.
 raylib/CMakeFiles/raylib.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles 31
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles 31
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 raylib/CMakeFiles/raylib.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles 0
 .PHONY : raylib/CMakeFiles/raylib.dir/rule
 
 # Convenience name for target.
@@ -196,7 +196,7 @@ raylib: raylib/CMakeFiles/raylib.dir/rule
 # codegen rule for target.
 raylib/CMakeFiles/raylib.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f raylib/CMakeFiles/raylib.dir/build.make raylib/CMakeFiles/raylib.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=24,25,26,27,28,29,30,31 "Finished codegen for target raylib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=24,25,26,27,28,29,30,31 "Finished codegen for target raylib"
 .PHONY : raylib/CMakeFiles/raylib.dir/codegen
 
 # clean rule for target.
@@ -211,14 +211,14 @@ raylib/CMakeFiles/raylib.dir/clean:
 raylib/external/glfw/src/CMakeFiles/glfw.dir/all:
 	$(MAKE) $(MAKESILENT) -f raylib/external/glfw/src/CMakeFiles/glfw.dir/build.make raylib/external/glfw/src/CMakeFiles/glfw.dir/depend
 	$(MAKE) $(MAKESILENT) -f raylib/external/glfw/src/CMakeFiles/glfw.dir/build.make raylib/external/glfw/src/CMakeFiles/glfw.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23 "Built target glfw"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23 "Built target glfw"
 .PHONY : raylib/external/glfw/src/CMakeFiles/glfw.dir/all
 
 # Build rule for subdir invocation for target.
 raylib/external/glfw/src/CMakeFiles/glfw.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles 23
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles 23
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 raylib/external/glfw/src/CMakeFiles/glfw.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles 0
 .PHONY : raylib/external/glfw/src/CMakeFiles/glfw.dir/rule
 
 # Convenience name for target.
@@ -228,7 +228,7 @@ glfw: raylib/external/glfw/src/CMakeFiles/glfw.dir/rule
 # codegen rule for target.
 raylib/external/glfw/src/CMakeFiles/glfw.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f raylib/external/glfw/src/CMakeFiles/glfw.dir/build.make raylib/external/glfw/src/CMakeFiles/glfw.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23 "Finished codegen for target glfw"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23 "Finished codegen for target glfw"
 .PHONY : raylib/external/glfw/src/CMakeFiles/glfw.dir/codegen
 
 # clean rule for target.
@@ -243,14 +243,14 @@ raylib/external/glfw/src/CMakeFiles/glfw.dir/clean:
 raylib/external/glfw/src/CMakeFiles/update_mappings.dir/all:
 	$(MAKE) $(MAKESILENT) -f raylib/external/glfw/src/CMakeFiles/update_mappings.dir/build.make raylib/external/glfw/src/CMakeFiles/update_mappings.dir/depend
 	$(MAKE) $(MAKESILENT) -f raylib/external/glfw/src/CMakeFiles/update_mappings.dir/build.make raylib/external/glfw/src/CMakeFiles/update_mappings.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=32 "Built target update_mappings"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=32 "Built target update_mappings"
 .PHONY : raylib/external/glfw/src/CMakeFiles/update_mappings.dir/all
 
 # Build rule for subdir invocation for target.
 raylib/external/glfw/src/CMakeFiles/update_mappings.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles 1
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 raylib/external/glfw/src/CMakeFiles/update_mappings.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles 0
 .PHONY : raylib/external/glfw/src/CMakeFiles/update_mappings.dir/rule
 
 # Convenience name for target.
@@ -260,7 +260,7 @@ update_mappings: raylib/external/glfw/src/CMakeFiles/update_mappings.dir/rule
 # codegen rule for target.
 raylib/external/glfw/src/CMakeFiles/update_mappings.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f raylib/external/glfw/src/CMakeFiles/update_mappings.dir/build.make raylib/external/glfw/src/CMakeFiles/update_mappings.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=32 "Finished codegen for target update_mappings"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=32 "Finished codegen for target update_mappings"
 .PHONY : raylib/external/glfw/src/CMakeFiles/update_mappings.dir/codegen
 
 # clean rule for target.

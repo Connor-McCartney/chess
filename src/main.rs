@@ -107,26 +107,26 @@ fn main() {
 
     while !rl.window_should_close() {
         // white's turn
-        /*
         let white_move: Move = get_player_move(&mut rl, &mut game_position, &thread, &piece_images_map); 
         if white_move == NULL_MOVE {
             break;
         }
-        */
+        /*
         let white_move = get_engine_move(&mut game_position);
+        */
         play_move(&mut game_position, white_move);
         if check_game_over(&mut rl, &thread, &mut game_position, &piece_images_map) {
             break;
         }
 
         // black's turn
-        /*
         let black_move: Move = get_player_move(&mut rl, &mut game_position, &thread, &piece_images_map); 
         if black_move == NULL_MOVE {
             break;
         }
-        */
+        /*
         let black_move = get_engine_move(&mut game_position);
+        */
         play_move(&mut game_position, black_move);
         if check_game_over(&mut rl, &thread, &mut game_position, &piece_images_map) {
             break;

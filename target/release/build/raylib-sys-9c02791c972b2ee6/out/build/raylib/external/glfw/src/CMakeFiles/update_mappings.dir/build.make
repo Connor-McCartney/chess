@@ -56,7 +56,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build
+CMAKE_BINARY_DIR = /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build
 
 # Utility rule file for update_mappings.
 
@@ -67,7 +67,7 @@ include raylib/external/glfw/src/CMakeFiles/update_mappings.dir/compiler_depend.
 include raylib/external/glfw/src/CMakeFiles/update_mappings.dir/progress.make
 
 raylib/external/glfw/src/CMakeFiles/update_mappings:
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Updating gamepad mappings from upstream repository"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Updating gamepad mappings from upstream repository"
 	cd /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/external/glfw/src && /usr/bin/cmake -P /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/external/glfw/CMake/GenerateMappings.cmake mappings.h.in mappings.h
 
 raylib/external/glfw/src/CMakeFiles/update_mappings.dir/codegen:
@@ -82,10 +82,10 @@ raylib/external/glfw/src/CMakeFiles/update_mappings.dir/build: update_mappings
 .PHONY : raylib/external/glfw/src/CMakeFiles/update_mappings.dir/build
 
 raylib/external/glfw/src/CMakeFiles/update_mappings.dir/clean:
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src && $(CMAKE_COMMAND) -P CMakeFiles/update_mappings.dir/cmake_clean.cmake
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src && $(CMAKE_COMMAND) -P CMakeFiles/update_mappings.dir/cmake_clean.cmake
 .PHONY : raylib/external/glfw/src/CMakeFiles/update_mappings.dir/clean
 
 raylib/external/glfw/src/CMakeFiles/update_mappings.dir/depend:
-	cd /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/external/glfw/src /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/update_mappings.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib /home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib/src/external/glfw/src /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/external/glfw/src/CMakeFiles/update_mappings.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : raylib/external/glfw/src/CMakeFiles/update_mappings.dir/depend
 

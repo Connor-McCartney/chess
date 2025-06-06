@@ -1,4 +1,4 @@
-prefix=/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out
+prefix=/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

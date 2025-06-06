@@ -85,6 +85,19 @@ fn move_piece(game_position: &mut Position, m: Move) {
         new_castling_rights = game_position.castling_rights_history[l-1].clone(); 
     }
 
+    // if a rook is captured we can't castle anymore
+    if start.colour == Colours::WHITE && m.end_x == 0 && m.end_y == 7 {
+        new_castling_rights[3] = false;
+    }
+    if start.colour == Colours::WHITE && m.end_x == 7 && m.end_y == 7 {
+        new_castling_rights[1] = false;
+    }
+    if start.colour == Colours::BLACK && m.end_x == 0 && m.end_y == 0 {
+        new_castling_rights[2] = false;
+    }
+    if start.colour == Colours::BLACK && m.end_x == 7 && m.end_y == 0 {
+        new_castling_rights[0] = false;
+    }
 
     // if we move a rook we can't castle anymore
     if start.piece_name == PieceNames::WhiteRook {

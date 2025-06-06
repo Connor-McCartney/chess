@@ -2,7 +2,7 @@
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out")
+  set(CMAKE_INSTALL_PREFIX "/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -44,14 +44,14 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/cmake_install.cmake")
+  include("/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/raylib/cmake_install.cmake")
 
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/install_local_manifest.txt"
+  file(WRITE "/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
 if(CMAKE_INSTALL_COMPONENT)
@@ -67,6 +67,6 @@ else()
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

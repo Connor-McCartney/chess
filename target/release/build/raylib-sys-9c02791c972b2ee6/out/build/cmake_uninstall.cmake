@@ -1,8 +1,8 @@
-if(NOT EXISTS "/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/install_manifest.txt")
-  message(FATAL_ERROR "Cannot find install manifest: /home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/install_manifest.txt")
+if(NOT EXISTS "/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/install_manifest.txt")
+  message(FATAL_ERROR "Cannot find install manifest: /home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/install_manifest.txt")
 endif()
 
-file(READ "/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/install_manifest.txt" files)
+file(READ "/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build/install_manifest.txt" files)
 string(REGEX REPLACE "\n" ";" files "${files}")
 foreach(file ${files})
   message(STATUS "Uninstalling $ENV{DESTDIR}${file}")

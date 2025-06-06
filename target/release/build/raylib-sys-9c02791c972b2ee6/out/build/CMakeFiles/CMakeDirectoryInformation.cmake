@@ -3,7 +3,7 @@
 
 # Relative path conversion top directories.
 set(CMAKE_RELATIVE_PATH_TOP_SOURCE "/home/connor/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/raylib-sys-5.5.1/raylib")
-set(CMAKE_RELATIVE_PATH_TOP_BINARY "/home/connor/Documents/rust-chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build")
+set(CMAKE_RELATIVE_PATH_TOP_BINARY "/home/connor/Documents/chess/target/release/build/raylib-sys-9c02791c972b2ee6/out/build")
 
 # Force unix paths in dependencies.
 set(CMAKE_FORCE_UNIX_PATHS 1)
