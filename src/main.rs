@@ -94,9 +94,7 @@ fn main() {
         if my_move == NULL_MOVE {
             break;
         }
-        move_piece(&mut game_position, my_move);
-        game_position.turn *= -1;
-        game_position.move_history.push(my_move);
+        play_move(&mut game_position, my_move);
         draw_board(&mut rl, &thread, &mut game_position, &piece_images_map);
     }
 }
